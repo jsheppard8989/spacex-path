@@ -1,7 +1,7 @@
 /* All facts carry a source key; see SOURCES below. Scenario numbers are labeled. */
 window.SRC = {
   q10: { t: 'SpaceX Q2 2026 10-Q (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm' },
-  s424: { t: 'SpaceX IPO prospectus 424B4, Jun 12, 2026 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
+  s424: { t: 'SpaceX IPO prospectus 424B4, dated Jun 11, 2026, filed Jun 12; lock-up days count from Jun 11 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
   k814: { t: 'SpaceX 8-K, Aug 14, 2026 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm' },
   f14: { t: 'SpaceX: Starship Flight 14 page', u: 'https://www.spacex.com/launches/starship-flight-14/' },
   nsf: { t: 'NASASpaceflight, Oct 9, 2026 (press)', u: 'https://www.nasaspaceflight.com/2026/10/ship-40-returns-ship-42-more-testing/' },
@@ -89,9 +89,9 @@ window.EVENTS = [
    factSrc: ['s424'],
    o: { miss: 'Heavy selling; the stock closes below the $135 IPO price.', neutral: 'Some selling, absorbed within the recent range.', bull: 'Absorbed easily, like the August and September tranches.' },
    confirm: 'Price and volume on and after Oct 24' },
- { id: 'L2', act: 2, theme: 'vault', title: 'The big unlock: up to 1.3B shares', date: 'Second trading day after the Q3 release (date not set)', sort: '2026-11-14', src: ['s424'],
+ { id: 'L2', act: 2, theme: 'vault', title: 'The big unlock: about 1.37B shares', date: 'Second trading day after the Q3 release (date not set)', sort: '2026-11-16', src: ['s424'],
    group: 'near', w: 0.08, bucket: 'capital', missHit: -0.17,
-   fact: 'Up to <b>1.3B shares</b>, 28% of the 180-day pool, unlock on the second full trading day after the Q3 results (prospectus p. 259).',
+   fact: 'About <b>1.37B shares</b> (911.5M plus 455.8M conditional), 28% of the 180-day pool, unlock on the second full trading day after the Q3 results (prospectus p. 259).',
    factSrc: ['s424'],
    o: { miss: 'A weak print plus the unlock pushes the stock below $135 on heavy volume.', neutral: 'Supply caps the stock in its September range.', bull: 'A strong print soaks up the supply.' },
    confirm: 'Price and volume two trading days after the Q3 release' },
@@ -126,7 +126,7 @@ window.EVENTS = [
    factSrc: ['q10', 's424'],
    o: { miss: 'No outside payloads before 2028; Starship stays an internal cost.', neutral: 'A handful of government and commercial payloads in 2027-28.', bull: 'Starship gets its own revenue line; launch cost heads toward ~$500/kg by 2030 (Morgan Stanley view).' },
    confirm: 'Space segment disclosures in 10-Qs' },
- { id: 'G4', act: 3, gate: 4, theme: 'moon', title: 'Gate 4: Moon lander milestones (Human Landing System)', date: 'Date not set. NASA OIG (Mar 2026): propellant-transfer test slipped; uncrewed demo expected to slip to end-2026; Artemis III planned Jun 2027. WSJ: uncrewed lunar landing target Mar 2027', sort: '2027-03-31', src: ['oig', 'wsj', 'ars'],
+ { id: 'G4', act: 3, gate: 4, theme: 'moon', title: 'Gate 4: Moon lander milestones (Human Landing System)', date: 'Date not set. NASA OIG (Mar 2026): propellant-transfer test slipped; uncrewed demo expected to slip to end-2026; Artemis III planned Jun 2027 (superseded; see Ars and Reuters). WSJ: uncrewed lunar landing target Mar 2027', sort: '2027-03-31', src: ['oig', 'wsj', 'ars', 'reutart'],
    group: 'long', w: 0.12, bucket: 'starship',
    fact: 'Starship is NASA\u2019s Human Landing System for Artemis (prospectus). Ship-to-ship propellant transfer has not yet flown (NASA OIG). Artemis III is now an Earth-orbit docking test, no earlier than late 2027 (press).',
    factSrc: ['s424', 'oig', 'ars'],
@@ -147,7 +147,7 @@ window.RADAR = [
  { title: '120-day lock-up tranche (up to 328.4M shares)', date: 'Fri Oct 9, 2026 (done)', sort: '2026-10-09', theme: 'vault', src: ['s424'], done: true, fact: 'Prospectus lock-up table, p. 259.' },
  { title: 'Colossus 2 reported powered up', date: 'Fri Oct 9, 2026 (press, unverified)', sort: '2026-10-09b', theme: 'datacenter', src: ['newz'], done: true,
    fact: 'Press report. The filings say COLOSSUS and COLOSSUS II together provide about 1.0 gigawatts (prospectus); company-wide installed draw was 1.4 gigawatts at Jun 30 (10-Q).' },
- { title: 'Musk shares (6.4B) eligible; S&P 500 seasoning met', date: 'Sat Jun 12, 2027', sort: '2027-06-12', theme: 'vault', src: ['s424'], fact: 'S&P 500 also needs GAAP profits. Supply event, not in the game math.' },
+ { title: 'Musk shares (6.4B) eligible; S&P 500 seasoning met', date: 'On or after Sat Jun 12, 2027', sort: '2027-06-12', theme: 'vault', src: ['s424'], fact: 'S&P 500 also needs GAAP profits. Supply event, not in the game math.' },
 ];
 
 /* "Elon's plan": only figures Musk or the company actually stated. dial: which game dial it sets (or null = context only). */
@@ -156,14 +156,14 @@ window.ELON = {
   figs: [
     { dial: 'gw', fig: '"probable case (~50th percentile guess) is reaching an annualized rate of 100GW/year of space AI satellites launched from Earth in 3 to 4 years"', who: 'Musk stated, Jan 22, 2026, post on X', u: 'https://x.com/elonmusk/status/2014416914550841727' },
     { dial: 'gw', fig: '"Starship could deliver 100GW/year to high Earth orbit within 4 to 5 years if we can solve the other parts of the equation"', who: 'Musk stated, Nov 2, 2025, post on X', u: 'https://x.com/elonmusk/status/1984868748378157312' },
-    { dial: 'gw', fig: 'Goal of "deploying 100 gigawatts of annual compute power to orbit"; deployment "as early as 2028"', who: 'Company stated, Jun 12, 2026, prospectus pp. 4 and 12', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
-    { dial: null, fig: '100 gigawatts a year needs satellites with "over 100 kilowatts of compute power per metric ton", "thousands of launches per year" and about one million metric tons to orbit a year', who: 'Company stated, Jun 12, 2026, prospectus p. 10', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
+    { dial: 'gw', fig: 'Goal of "deploying 100 gigawatts of annual compute power to orbit"; deployment "as early as 2028"', who: 'Company stated, Jun 11, 2026, prospectus pp. 4 and 12', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
+    { dial: null, fig: '100 gigawatts a year needs satellites with "over 100 kilowatts of compute power per metric ton", "thousands of launches per year" and about one million metric tons to orbit a year', who: 'Company stated, Jun 11, 2026, prospectus p. 10', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
     { dial: null, fig: '"Starship should be able to deliver around 300 GW per year of solar-powered AI satellites to orbit, maybe 500 GW" (no date given)', who: 'Musk stated, Nov 19, 2025, post on X', u: 'https://x.com/elonmusk/status/1991215836959228322' },
     { dial: null, fig: 'Terafab goal: "over a TERAWATT of compute per year ... with ~80% for space"', who: 'Musk stated, Mar 21, 2026, post on X (prospectus p. 10: one terawatt of compute hardware a year)', u: 'https://x.com/elonmusk/status/2035506574182199757' },
     { dial: null, fig: '"100TW/year is possible from a lunar base" with a mass driver; one CEO award tranche vests on "non-Earth-based data centers capable of delivering 100 terawatts of compute per year"', who: 'Musk stated, Nov 2, 2025, post on X; company, prospectus p. 19', u: 'https://x.com/elonmusk/status/1984868748378157312' },
     { dial: null, fig: '"the lowest cost place to put AI will be space and that\u2019ll be true within 2 years, maybe 3, 3 at the latest"', who: 'Musk stated, Jan 22, 2026, World Economic Forum, Davos (talk)', u: 'https://www.youtube.com/watch?v=IgifEgm1-e0' },
     { dial: null, fig: 'Cost to orbit "would drop well below $100/kg" with full reusability (talk, same day at Davos: "under $100 a pound")', who: 'Musk stated, Jul 29, 2026, post on X; Jan 22, 2026, Davos', u: 'https://x.com/elonmusk/status/2082612362226639328' },
-    { dial: null, fig: 'Starship aims to cut the cost to orbit "by 99% or more" from the $18,500/kg historical average (i.e. about $185/kg or less, our arithmetic)', who: 'Company stated, Jun 12, 2026, prospectus pp. 76 and 94', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
+    { dial: null, fig: 'Starship aims to cut the cost to orbit "by 99% or more" from the $18,500/kg historical average (i.e. about $185/kg or less, our arithmetic)', who: 'Company stated, Jun 11, 2026, prospectus pp. 76 and 94', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
     { dial: null, fig: 'Starbase Louisiana: "more than 30 Starship flights per day" ultimately', who: 'Musk stated, Aug 25, 2026, post on X', u: 'https://x.com/elonmusk/status/2092292773915537580' },
     { dial: 'rate', fig: 'No stated rental price or revenue per watt for orbital compute (only "lower cost per token", prospectus p. 9). Our default kept.', who: 'none found', u: '' },
     { dial: 'mult', fig: 'No stated valuation multiple. Our default kept.', who: 'none found', u: '' }
