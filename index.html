@@ -23,17 +23,17 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="banner" role="note">Opinion and scenarios, not advice. Data as of Oct 9, 2026 close.</div>
+<div class="banner" role="note">Opinion and scenarios, not advice. Data as of Oct 12, 2026 close.</div>
 
 <header class="hero" id="top">
   <canvas id="heroCanvas" aria-label="Animated Starship lifting off at night" role="img"></canvas>
   <div class="hero-copy">
     <p class="sitetitle">SpaceX: Choose Your Model Adventure</p>
-    <p class="kicker">Scarcity &amp; Abundance · Sat Oct 10, 2026</p>
-    <h1>What would have to go right for SpaceX to be worth more than today's ~$2.21T?</h1>
+    <p class="kicker">Scarcity &amp; Abundance · Tue Oct 13, 2026</p>
+    <h1>What would have to go right for SpaceX to be worth more than today's ~$2.22T?</h1>
     <div class="startnum">
-      <div><span class="lbl">Share price</span><span class="big" id="heroPrice">$162.57</span><span class="src">Oct 9, 2026 close</span></div>
-      <div><span class="lbl">Market cap</span><span class="big" id="heroCap">$2.21T</span><span class="src">13.57B shares, <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm" target="_blank" rel="noopener">10-Q</a> + <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm" target="_blank" rel="noopener">8-K</a></span></div>
+      <div><span class="lbl">Share price</span><span class="big" id="heroPrice">$163.42</span><span class="src">Oct 12, 2026 close</span></div>
+      <div><span class="lbl">Market cap</span><span class="big" id="heroCap">$2.22T</span><span class="src">13.57B shares, <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm" target="_blank" rel="noopener">10-Q</a> + <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm" target="_blank" rel="noopener">8-K</a></span></div>
       <div class="tag-op">Opinion and scenarios, not advice</div>
     </div>
     <div class="cta"><a class="btn primary" href="#game">Select your path ▸</a><a class="btn" href="#calendar">Catalyst calendar</a><a class="btn" href="#article">Read the case</a></div>
@@ -55,7 +55,7 @@
 <section id="game" class="wrap">
   <h2>Select your path</h2>
   <div class="youpick"><b>You choose every checkpoint.</b> There are 14 checkpoints, and you set each one to <span class="tg miss">Miss</span>, <span class="tg neutral">Neutral</span> or <span class="tg bull">Bull</span>. Do it on the board below or one at a time in the step-through card. Every pick plays its own animation. The presets only fill the board for you, and you can change any pick at any time. Once all 14 are set, <b>▶ Play full timeline</b> runs the whole path in date order.</div>
-  <p class="sub">Three acts: <b>Compute</b>, then <b>Launch &amp; Starlink</b>, then the five <b>Starship gates</b>. The running <i>scenario</i> price starts at $162.57 / $2.21T. Hover or tap <span class="tip-i">ⓘ</span> for the formula. Starship gates open in order: if one misses, every later gate can only slip (Neutral) or miss.</p>
+  <p class="sub">Three acts: <b>Compute</b>, then <b>Launch &amp; Starlink</b>, then the five <b>Starship gates</b>. The running <i>scenario</i> price starts at $163.42 / $2.22T. Hover or tap <span class="tip-i">ⓘ</span> for the formula. Starship gates open in order: if one misses, every later gate can only slip (Neutral) or miss.</p>
   <div class="presets">
     <span class="plbl">Shortcuts (fill the board):</span>
     <button class="btn" data-preset="bull" aria-pressed="false">Preset: Full Bull</button>
@@ -76,8 +76,8 @@
     <button class="btn primary sm" id="showMath" aria-haspopup="dialog">Show the math</button>
   </div>
   <div class="hud" id="hud">
-    <div><span class="lbl">Scenario price</span><i class="scen big" id="gPrice">$162.57</i> <span class="scen-tag">scenario</span> <span class="tip-i" id="gTip" tabindex="0">ⓘ<span class="tip" id="gTipText"></span></span></div>
-    <div><span class="lbl">Scenario market cap</span><i class="scen big" id="gCap">$2.21T</i> <span class="scen-tag">scenario</span></div>
+    <div><span class="lbl">Scenario price</span><i class="scen big" id="gPrice">$163.42</i> <span class="scen-tag">scenario</span> <span class="tip-i" id="gTip" tabindex="0">ⓘ<span class="tip" id="gTipText"></span></span></div>
+    <div><span class="lbl">Scenario market cap</span><i class="scen big" id="gCap">$2.22T</i> <span class="scen-tag">scenario</span></div>
     <div><span class="lbl">Orbital add-on</span><span id="gOrb"></span></div>
     <div><span class="lbl">Progress</span><span id="gProg">0 / 14</span></div>
     <div class="trail" id="gTrail" aria-label="Your picks so far"></div>
@@ -104,7 +104,7 @@
   <div class="card-fact">Company-wide installed GPU power (nameplate compute draw) was <b>1.4 gigawatts at Jun 30, 2026</b>, up from 0.4 gigawatts a year earlier; it is installed capacity, not actual use, and is not split by site. Q2 AI segment revenue was <b>$2.56B</b>, and Q2 AI capital spending was <b>$15.83B</b>. <span class="s">Source: <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm" target="_blank" rel="noopener">Q2 10-Q</a></span></div>
   <div class="card-fact">COLOSSUS and COLOSSUS II together provide <b>about 1.0 gigawatts</b>. COLOSSUS II's first cluster (about 110,000 GB200s, 210 MW) came online in 91 days, the second (110,000 GB300s, 220 MW) in 64 days, and the next phase is expected to add <b>at least 220,000 GB300s and over 400 MW</b>, with no date given. <span class="s">Source: <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm" target="_blank" rel="noopener">424B4</a>, p. 77</span></div>
   <div class="card-fact">Anthropic pays <b>$1.25B a month through May 2029</b> (about $15B a year, <i>contracted, not guaranteed</i>): <b>after an initial three-month period, either side can end it on 90 days’ notice</b> (prospectus p. 14). The capacity covers about 325,000 Nvidia GPUs. <span class="s">Source: <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm" target="_blank" rel="noopener">424B4</a>, p. 14</span> Google pays <b>$920M a month</b> from October through mid-2029, with a delivery grace period ending about Oct 31 and a 90-day exit after Dec 31. <span class="s">Source: Reuters via <a href="https://www.webanditnews.com/2026/10/09/spacexs-29-billion-google-compute-pact-faces-early-tests-as-orbital-ai-ambitions-loom/" target="_blank" rel="noopener">Web &amp; IT News</a> (press)</span></div>
-  <div class="card-op"><b>What's verified and what isn't (Colossus 2 and Nvidia).</b> Verified in filings: the 1.4 gigawatts company-wide figure, the ~1.0 gigawatts COLOSSUS + COLOSSUS II figure, the cluster sizes above, and $27.96B of non-cancelable commitments, mostly AI infrastructure (10-Q Note 16). <b>Not verified:</b> press reports that Colossus 2 was powered up on Oct 9 and could reach about 1.2 million GPUs by year-end (<a href="https://newzino.com/story/xai-colossus-2-online" target="_blank" rel="noopener">Newzino</a>; Musk's Sep 24 X post per <a href="https://www.cnbc.com/2026/10/07/spacex-nvidia-chips-apollo-financing.html" target="_blank" rel="noopener">CNBC</a>, "if we get lucky"), and that SpaceX is in <i>preliminary</i> talks to debt-finance a large Nvidia GPU purchase (CNBC; <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/spacex-reportedly-seeking-usd40-billion-debt-package-for-nvidia-ai-hardware-massive-raise-could-fund-roughly-360-000-vera-rubin-gpus-across-5-000-nvl72-racks" target="_blank" rel="noopener">Tom's Hardware</a>). The 10-Q never names Nvidia, and no filing shows an Nvidia order. Musk said on the Q2 call SpaceX will use Nvidia chips exclusively and expects a "significant allocation" of Vera Rubin GPUs next year (<a href="https://www.cnbc.com/2026/08/14/nvidia-discloses-21-billion-stake-in-spacex-at-end-of-second-quarter.html" target="_blank" rel="noopener">CNBC</a>, press). We use none of the press GPU counts or dollar figures in the math.</div>
+  <div class="card-op"><b>What's verified and what isn't (Colossus 2 and Nvidia).</b> Verified in filings: the 1.4 gigawatts company-wide figure, the ~1.0 gigawatts COLOSSUS + COLOSSUS II figure, the cluster sizes above, and $27.96B of non-cancelable commitments, mostly AI infrastructure (10-Q Note 16). <b>Not verified:</b> that Colossus 2 could reach about 1.2 million GPUs by year-end (Musk's Sep 24 X post per <a href="https://www.cnbc.com/2026/10/07/spacex-nvidia-chips-apollo-financing.html" target="_blank" rel="noopener">CNBC</a>, "if we get lucky"), and that SpaceX is in <i>preliminary</i> talks to debt-finance a large Nvidia GPU purchase (CNBC; <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/spacex-reportedly-seeking-usd40-billion-debt-package-for-nvidia-ai-hardware-massive-raise-could-fund-roughly-360-000-vera-rubin-gpus-across-5-000-nvl72-racks" target="_blank" rel="noopener">Tom's Hardware</a>). The 10-Q never names Nvidia, and no filing shows an Nvidia order. Musk said on the Q2 call SpaceX will use Nvidia chips exclusively and expects a "significant allocation" of Vera Rubin GPUs next year (<a href="https://www.cnbc.com/2026/08/14/nvidia-discloses-21-billion-stake-in-spacex-at-end-of-second-quarter.html" target="_blank" rel="noopener">CNBC</a>, press). We use none of the press GPU counts or dollar figures in the math.</div>
   <div class="card-op"><b>Our view: compute pricing is the whole game.</b> Q2 AI revenue works out to about <b>$7.3B per gigawatt per year</b> (our arithmetic: $2.561B × 4 ÷ 1.4 gigawatts). Consensus prices compute at about $17.60 a watt across 4.1 gigawatts, and <b>each +$10/W adds more than $40B of revenue</b> (<a href="https://www.benzinga.com/analyst-stock-ratings/reiteration/26/10/62166196/spacex-is-cheap-and-getting-cheaper-morgan-stanley-says" target="_blank" rel="noopener">Morgan Stanley note, Oct 4, via Benzinga</a>). The rate swings more than the build: at 5 gigawatts, a 30% rate cut costs about $11B a year (our arithmetic). The honest caveat: SpaceX buys chips from Nvidia, so Nvidia is paid first; SpaceX earns the spread while compute is scarce. We think scarcity lasts longer than the market fears, because power and build speed are the bottleneck, and SpaceX builds faster than anyone (91 and 64 days per cluster, above).</div>
 
   <h3>2. Launch: the real tollbooth</h3>
@@ -135,7 +135,7 @@
     <li><b>Compute price reset.</b> Hyperscalers are building their own capacity; for Anthropic, after an initial three-month period, either side can end it on 90 days’ notice (prospectus p. 14). This is the main way the bull case breaks.</li>
     <li><b>Starship slips.</b> A gate 1 or 2 failure delays every later revenue line.</li>
     <li><b>Capital.</b> About $16.6B a quarter of burn at the Q2 pace against ~$62B of net cash at Jun 30 (<i>downside estimate</i>); Morgan Stanley flagged about $84B a year of external capital 2027-2034 (press).</li>
-    <li><b>Supply.</b> About 2.43B shares unlock Oct 24 to Dec 8 (prospectus).</li>
+    <li><b>Supply.</b> Up to about 2.04B shares (about 15% of 13.57B) unlock Oct 24 to Dec 8 (prospectus pp. 258–259: 328.4M + 911.5M + 797.6M; the Dec 8 amount includes a 455.8M tranche that may unlock earlier).</li>
     <li><b>Legal/power.</b> NAACP Clean Air Act suit over COLOSSUS II turbines (10-Q).</li>
   </ul>
 
@@ -148,15 +148,15 @@
       <tr class="tilt"><td>Our tilt (this page): bull odds 40%, base 40%, bear 20%</td><td colspan="4">3-month <i class="scen">≈$174</i>, 3-year <i class="scen">≈$192</i> <span class="scen-tag">scenario</span> (our estimate: 0.4×210 + 0.4×165 + 0.2×118; 0.4×310 + 0.4×145 + 0.2×52)</td></tr>
     </tbody>
   </table>
-  <p class="note">The 3-year hurdle at Morgan Stanley's 11.9% cost of equity is about $228 (<a href="https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39" target="_blank" rel="noopener">xxquant</a>, secondary; $162.57 × 1.119³). Only the bull clears it. Scenario prices are all <i>opinion</i>.</p>
+  <p class="note">The 3-year hurdle is about $229 ($163.42 × 1.119³). The 11.9% yearly rate is our assumption; a secondary summary (<a href="https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39" target="_blank" rel="noopener">xxquant</a>) attributes it to Morgan Stanley, and we haven't checked the original note. Only the bull clears it. Scenario prices are all <i>opinion</i>.</p>
 
-  <div class="disclaimer"><b>Disclaimer.</b> Opinion and scenarios, not investment advice. No position. Prices are as of the Oct 9, 2026 close.</div>
+  <div class="disclaimer"><b>Disclaimer.</b> Opinion and scenarios, not investment advice. No position. Prices are as of the Oct 12, 2026 close.</div>
 </article>
 </main>
 
 <div id="finale" class="finale" hidden role="dialog" aria-label="Full timeline">
   <canvas id="fCanvas"></canvas>
-  <div class="fhud" id="fHud"><span class="lbl">Running scenario price</span><i class="scen big" id="fPrice">$162.57</i><span class="lbl">Market cap</span><i class="scen" id="fCap">$2.21T</i><span class="scen-tag">scenario</span><div class="fstep" id="fStep"></div></div>
+  <div class="fhud" id="fHud"><span class="lbl">Running scenario price</span><i class="scen big" id="fPrice">$163.42</i><span class="lbl">Market cap</span><i class="scen" id="fCap">$2.22T</i><span class="scen-tag">scenario</span><div class="fstep" id="fStep"></div></div>
   <div class="fcap" id="fCapn"></div>
   <div class="fbar"><span id="fBar"></span></div>
   <button class="btn fclose" id="fClose">Close ✕</button>

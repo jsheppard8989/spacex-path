@@ -1,16 +1,17 @@
 {
-  "asOf": "2026-10-09 close (America/Chicago)",
+  "asOf": "2026-10-12 close (America/Chicago)",
   "spcx": {
-    "price": 162.57,
-    "priceSource": "Desk Yahoo Finance daily-close cache, pulled Oct 9 ~11:30 PM CT (provisional; not an exchange record)",
+    "price": 163.42,
+    "priceSource": "Yahoo Finance daily chart (SPCX, NasdaqGS), Oct 12, 2026 close, pulled Oct 13 ~9:50 AM CT; matches stockanalysis.com history (market data, not an exchange record)",
     "shares": 13.57e9,
     "sharesSource": "SpaceX Q2 2026 10-Q cover + 8-K Aug 14, 2026",
     "ipoPrice": 135
   },
   "tsla": {
-    "price": 382.70,
-    "marketCap": 1.51e12,
-    "source": "https://stockanalysis.com/stocks/tsla/market-cap/",
-    "note": "Nasdaq Data Link via stockanalysis.com, Oct 9, 2026 close; StatMuse shows $1.48T on 3.87B shares"
+    "price": 378.03,
+    "shares": 3949547394,
+    "marketCap": 1.493e12,
+    "source": "https://finance.yahoo.com/quote/TSLA/history/",
+    "note": "Oct 12, 2026 close $378.03 (Yahoo Finance) x 3,949,547,394 shares (Tesla Q2 2026 10-Q cover) = $1.493T"
   }
 }
