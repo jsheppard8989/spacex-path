@@ -7,7 +7,7 @@
   const pct = x => (x >= 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
   const L = { near: { bull: Math.log(A.b3m / A.spot), neutral: Math.log(A.n3m / A.spot) }, long: { bull: Math.log(A.b3y / A.b3m), neutral: Math.log(A.n3y / A.n3m) } };
   const srcLinks = keys => (keys || []).map(k => SRC[k] ? '<a href="' + SRC[k].u + '" target="_blank" rel="noopener">' + SRC[k].t + '</a>' : '').join(' · ');
-  let PR = { spcx: { price: 163.42, shares: 13.57e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-12 close (America/Chicago)' };
+  let PR = { spcx: { price: 148.62, shares: 13.57e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-15 close (America/Chicago)' };
 
   /* ---------- prices (local data file; embedded fallback for file://) ---------- */
   function applyPrices() {
@@ -285,7 +285,7 @@
       if (seg === seq.length && $('#fEndNum')) { $('#fEndNum').textContent = (elonUsed && elonActive() ? 'Elon\u2019s plan, scenario if his targets are hit. ' : '') + 'Final scenario price ' + fmtP(fr.price) + ' · market cap ' + fmtC(fr.cap) + ' · of which orbital add-on +' + fmtP(fr.orbPS) + ' (scenario).'; }
       $('#fPrice').textContent = fmtP(pr.price); $('#fCap').textContent = fmtC(pr.cap); $('#fBar').style.width = (t / total * 100).toFixed(1) + '%';
       if (seg !== last) { last = seg;
-        if (seg === -1) { $('#fStep').textContent = 'Start · Oct 12, 2026 close'; $('#fCapn').innerHTML = '<b>Liftoff.</b> SPCX at $' + A.spot.toFixed(2) + ' (' + fmtC(A.spot * A.shares) + '). Flight 14 reached orbit on Sep 28. Your 14 picks play out in date order.'; }
+        if (seg === -1) { $('#fStep').textContent = 'Start · Oct 15, 2026 close'; $('#fCapn').innerHTML = '<b>Liftoff.</b> SPCX at $' + A.spot.toFixed(2) + ' (' + fmtC(A.spot * A.shares) + '). Flight 14 reached orbit on Sep 28. Your 14 picks play out in date order.'; }
         else if (seg < seq.length) { const e = seq[seg], pk = picks[e.id]; $('#fStep').innerHTML = (seg + 1) + ' / ' + seq.length + ' · ' + (/^date not set/i.test(e.date) ? 'date not set, placed ~' : '') + fmtMon(e.sort) + ' · <span class="tg ' + pk + ' on">' + pk.toUpperCase() + '</span>'; $('#fCapn').innerHTML = '<span class="fdate">' + e.date.split('(')[0].replace(/\.\s*$/, '') + '</span><b>' + e.title + '</b><br>' + e.o[pk]; }
         else { $('#fStep').textContent = 'Ending'; $('#fCapn').innerHTML = '<b>' + ENDS[k].title + '</b><br><span id="fEndNum"></span>'; }
         $('#fCapn').classList.toggle('top', seg === seq.length);
@@ -373,7 +373,7 @@
       ['Digital human augmentation', U, '$0', 'Strategy list (prospectus p. 11). No revenue disclosed.'],
       ['Optimus humanoid robots, robotaxis', T, 'Not in SPCX math. These are Tesla businesses; robots appear only as Starship payloads in the illustrations.', srcLinks(['optimus', 't10q'])],
       ['Direct-to-cell / Starlink Mobile (the phone business)', N, 'Not priced as its own line, and the game adds nothing for it (our Connectivity target already folds in a small probability-weighted mobile option). <b>Max upside:</b> our <i class="scen">$50B</i> mobile option ≈ <i class="scen">+$' + (50e9 / A.shares).toFixed(2) + '</i> per share, about ' + (50e9 / (A.spot * A.shares) * 100).toFixed(1) + '% of today\u2019s cap (basis: $50B ÷ 13.57B shares; the $50B is our weighting of MoffettNathanson and Besen scenarios). Even bullish third-party scenarios put the whole carrier option at about 1-12% of the cap (our arithmetic).', 'FCC grant DA 26-1078 (15,000 direct-to-phone satellites); EchoStar spectrum (10-Q). ' + srcLinks(['da', 'q10'])],
-      ['Tesla merger', N, 'Speculative, no merger announced. <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps at the Oct 12, 2026 close; Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge'])]
+      ['Tesla merger', N, 'Speculative, no merger announced. <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps (SPCX at the Oct 15, 2026 close, Tesla at the Oct 12, 2026 close); Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge'])]
     ];
     $('#streamsOut').innerHTML = '<div class="tblwrap"><table class="streams"><thead><tr><th>Revenue stream</th><th>Status</th><th>How the 2030 targets price it (bull / base / bear, our research)</th><th>Source</th></tr></thead><tbody>' +
       rows.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td class="s">' + r[3] + '</td></tr>').join('') + '</tbody></table></div>' +

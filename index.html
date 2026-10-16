@@ -23,17 +23,17 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="banner" role="note">Opinion and scenarios, not advice. Data as of Oct 12, 2026 close.</div>
+<div class="banner" role="note">Opinion and scenarios, not advice. Data as of Oct 15, 2026 close.</div>
 
 <header class="hero" id="top">
   <canvas id="heroCanvas" aria-label="Animated Starship lifting off at night" role="img"></canvas>
   <div class="hero-copy">
     <p class="sitetitle">SpaceX: Choose Your Model Adventure</p>
     <p class="kicker">Scarcity &amp; Abundance · Tue Oct 13, 2026</p>
-    <h1>What would have to go right for SpaceX to be worth more than today's ~$2.22T?</h1>
+    <h1>What would have to go right for SpaceX to be worth more than today's ~$2.02T?</h1>
     <div class="startnum">
-      <div><span class="lbl">Share price</span><span class="big" id="heroPrice">$163.42</span><span class="src">Oct 12, 2026 close</span></div>
-      <div><span class="lbl">Market cap</span><span class="big" id="heroCap">$2.22T</span><span class="src">13.57B shares, <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm" target="_blank" rel="noopener">10-Q</a> + <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm" target="_blank" rel="noopener">8-K</a></span></div>
+      <div><span class="lbl">Share price</span><span class="big" id="heroPrice">$148.62</span><span class="src">Oct 15, 2026 close</span></div>
+      <div><span class="lbl">Market cap</span><span class="big" id="heroCap">$2.02T</span><span class="src">13.57B shares, <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm" target="_blank" rel="noopener">10-Q</a> + <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm" target="_blank" rel="noopener">8-K</a></span></div>
       <div class="tag-op">Opinion and scenarios, not advice</div>
     </div>
     <div class="cta"><a class="btn primary" href="#game">Select your path ▸</a><a class="btn" href="#calendar">Catalyst calendar</a><a class="btn" href="#article">Read the case</a></div>
@@ -55,7 +55,7 @@
 <section id="game" class="wrap">
   <h2>Select your path</h2>
   <div class="youpick"><b>You choose every checkpoint.</b> There are 14 checkpoints, and you set each one to <span class="tg miss">Miss</span>, <span class="tg neutral">Neutral</span> or <span class="tg bull">Bull</span>. Do it on the board below or one at a time in the step-through card. Every pick plays its own animation. The presets only fill the board for you, and you can change any pick at any time. Once all 14 are set, <b>▶ Play full timeline</b> runs the whole path in date order.</div>
-  <p class="sub">Three acts: <b>Compute</b>, then <b>Launch &amp; Starlink</b>, then the five <b>Starship gates</b>. The running <i>scenario</i> price starts at $163.42 / $2.22T. Hover or tap <span class="tip-i">ⓘ</span> for the formula. Starship gates open in order: if one misses, every later gate can only slip (Neutral) or miss.</p>
+  <p class="sub">Three acts: <b>Compute</b>, then <b>Launch &amp; Starlink</b>, then the five <b>Starship gates</b>. The running <i>scenario</i> price starts at $148.62 / $2.02T. Hover or tap <span class="tip-i">ⓘ</span> for the formula. Starship gates open in order: if one misses, every later gate can only slip (Neutral) or miss.</p>
   <div class="presets">
     <span class="plbl">Shortcuts (fill the board):</span>
     <button class="btn" data-preset="bull" aria-pressed="false">Preset: Full Bull</button>
@@ -76,8 +76,8 @@
     <button class="btn primary sm" id="showMath" aria-haspopup="dialog">Show the math</button>
   </div>
   <div class="hud" id="hud">
-    <div><span class="lbl">Scenario price</span><i class="scen big" id="gPrice">$163.42</i> <span class="scen-tag">scenario</span> <span class="tip-i" id="gTip" tabindex="0">ⓘ<span class="tip" id="gTipText"></span></span></div>
-    <div><span class="lbl">Scenario market cap</span><i class="scen big" id="gCap">$2.22T</i> <span class="scen-tag">scenario</span></div>
+    <div><span class="lbl">Scenario price</span><i class="scen big" id="gPrice">$148.62</i> <span class="scen-tag">scenario</span> <span class="tip-i" id="gTip" tabindex="0">ⓘ<span class="tip" id="gTipText"></span></span></div>
+    <div><span class="lbl">Scenario market cap</span><i class="scen big" id="gCap">$2.02T</i> <span class="scen-tag">scenario</span></div>
     <div><span class="lbl">Orbital add-on</span><span id="gOrb"></span></div>
     <div><span class="lbl">Progress</span><span id="gProg">0 / 14</span></div>
     <div class="trail" id="gTrail" aria-label="Your picks so far"></div>
@@ -148,15 +148,15 @@
       <tr class="tilt"><td>Our tilt (this page): bull odds 40%, base 40%, bear 20%</td><td colspan="4">3-month <i class="scen">≈$174</i>, 3-year <i class="scen">≈$192</i> <span class="scen-tag">scenario</span> (our estimate: 0.4×210 + 0.4×165 + 0.2×118; 0.4×310 + 0.4×145 + 0.2×52)</td></tr>
     </tbody>
   </table>
-  <p class="note">The 3-year hurdle is about $229 ($163.42 × 1.119³). The 11.9% yearly rate is our assumption; a secondary summary (<a href="https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39" target="_blank" rel="noopener">xxquant</a>) attributes it to Morgan Stanley, and we haven't checked the original note. Only the bull clears it. Scenario prices are all <i>opinion</i>.</p>
+  <p class="note">The 3-year hurdle is about $208 ($148.62 × 1.119³). The 11.9% yearly rate is our assumption; a secondary summary (<a href="https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39" target="_blank" rel="noopener">xxquant</a>) attributes it to Morgan Stanley, and we haven't checked the original note. Only the bull clears it. Scenario prices are all <i>opinion</i>.</p>
 
-  <div class="disclaimer"><b>Disclaimer.</b> Opinion and scenarios, not investment advice. Prices are as of the Oct 12, 2026 close.</div>
+  <div class="disclaimer"><b>Disclaimer.</b> Opinion and scenarios, not investment advice. Prices are as of the Oct 15, 2026 close.</div>
 </article>
 </main>
 
 <div id="finale" class="finale" hidden role="dialog" aria-label="Full timeline">
   <canvas id="fCanvas"></canvas>
-  <div class="fhud" id="fHud"><span class="lbl">Running scenario price</span><i class="scen big" id="fPrice">$163.42</i><span class="lbl">Market cap</span><i class="scen" id="fCap">$2.22T</i><span class="scen-tag">scenario</span><div class="fstep" id="fStep"></div></div>
+  <div class="fhud" id="fHud"><span class="lbl">Running scenario price</span><i class="scen big" id="fPrice">$148.62</i><span class="lbl">Market cap</span><i class="scen" id="fCap">$2.02T</i><span class="scen-tag">scenario</span><div class="fstep" id="fStep"></div></div>
   <div class="fcap" id="fCapn"></div>
   <div class="fbar"><span id="fBar"></span></div>
   <button class="btn fclose" id="fClose">Close ✕</button>
