@@ -1,5 +1,8 @@
 /* All facts carry a source key; see SOURCES below. Scenario numbers are labeled. */
 window.SRC = {
+  q3: { t: 'SpaceX Q3 2026 results, EX-99.1 to 8-K filed Oct 20, 2026 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm' },
+  cnbcq3: { t: 'CNBC Q3 2026 earnings live updates, Oct 20, 2026 (press)', u: 'https://www.cnbc.com/2026/10/20/spacex-spcx-earnings-live-updates-q3-2026html.html' },
+  spacecom: { t: 'Space.com, Oct 2026: SpaceX will attempt double Starship catch on next test launch (press)', u: 'https://www.space.com/space-exploration/launches-spacecraft/spacex-will-attempt-1st-ever-double-starship-rocket-catch-on-next-test-launch-a-profound-technology-milestone-elon-musk-says' },
   q10: { t: 'SpaceX Q2 2026 10-Q (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm' },
   s424: { t: 'SpaceX IPO prospectus 424B4, dated Jun 11, 2026, filed Jun 12; lock-up days count from Jun 11 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026042639/spaceexplorationtechnologi.htm' },
   k814: { t: 'SpaceX 8-K, Aug 14, 2026 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026056945/spcx-20260814.htm' },
@@ -39,7 +42,7 @@ window.SRC = {
 };
 
 /* Scenario anchors (OPINION) */
-window.ANCHORS = { spot: 148.62, shares: 13.57e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
+window.ANCHORS = { spot: 144.75, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
   sh3y: { bull: 14.3e9, neutral: 14.6e9, miss: 15.2e9 }, shRaise: 13.98e9 };
 
 /* Downside bucket hits (downside estimates) */
@@ -58,10 +61,10 @@ window.EVENTS = [
    factSrc: ['gfwp'],
    o: { miss: 'By the Q3 10-Q (due by Nov 16), SpaceX discloses that Google ended the deal or took partial capacity at a reduced fee.', neutral: 'The Q3 10-Q is silent on delivery; payments continue.', bull: 'By the Q3 10-Q (due by Nov 16), SpaceX confirms full delivery and the full $920M a month.' },
    confirm: 'Q3 report / 10-Q (due by Nov 16, 2026)' },
- { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Date not set (10-Q due by Mon Nov 16, 2026)', sort: '2026-11-12', src: ['q2date', 'form10q'],
+ { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Released Tue Oct 20, 2026 (8-K, after the close). 10-Q still due by Mon Nov 16, 2026', sort: '2026-10-20', src: ['q3', 'form10q'],
    group: 'near', w: 0.26, bucket: 'ai', missHit: -0.203,
-   fact: 'Q2 AI segment revenue was <b>$2.56B</b>. A full quarter of the Anthropic contract alone is about $3.75B (our arithmetic). UBS estimates Q3 AI revenue of <b>$7.6B</b> (UBS view, press).',
-   factSrc: ['q10', 'pro'],
+   fact: 'Released Tue Oct 20, 2026 (8-K, after the close). Revenue <b>$14.58B</b> ($14,575M); SI (AI) revenue <b>$7.56B</b>; net income <b>$4.40B</b> ($4,404M); operating income $2.8B. 10-Q still due by Nov 16.',
+   factSrc: ['q3'],
    o: { miss: 'AI revenue comes in under $5B with capex still about $18B a quarter.', neutral: 'AI revenue roughly in line; capex unchanged; Starlink ARPU flat.', bull: 'AI revenue at or above $7B and capacity delivery confirmed.' },
    confirm: 'Q3 10-Q, due by Mon Nov 16, 2026' },
  { id: 'C3', act: 1, theme: 'datacenter', title: 'A 90-day termination notice (or none)', date: "Date not set. Google's 90-day right starts after Dec 31, 2026 (press); Anthropic: after an initial three-month period, either side can end it on 90 days’ notice (prospectus p. 14)", sort: '2026-12-31', src: ['web', 's424'],
@@ -85,13 +88,13 @@ window.EVENTS = [
 
  { id: 'L1', act: 2, theme: 'vault', title: '135-day lock-up tranche', date: 'On or after Sat Oct 24, 2026', sort: '2026-10-24', src: ['s424'],
    group: 'near', w: 0.06, bucket: 'capital', missHit: -0.17,
-   fact: 'Up to <b>328.4M shares</b> become eligible for sale (prospectus lock-up table, p. 259). In total up to about 2.04B shares (about 15% of 13.57B) unlock between Oct 24 and Dec 8: 328.4M + 911.5M + 797.6M (pp. 258–259; the Dec 8 amount includes a 455.8M tranche that may unlock earlier).',
+   fact: 'Up to <b>328.4M shares</b> become eligible for sale (prospectus lock-up table, p. 259). Schedule: Oct 22 up to 1.3B; Oct 24 up to 328.4M; Dec 8 up to 328.4M or 797.6M (depends on whether Additional Release Shares went out at the First Earnings Release Date). Total Oct 22–Dec 8: about 1.96B to 2.43B (pp. 258–259; totals our arithmetic).',
    factSrc: ['s424'],
    o: { miss: 'Heavy selling; the stock closes below the $135 IPO price in the first five trading days (Mon Oct 26 to Fri Oct 30).', neutral: 'Some selling, absorbed within the recent range.', bull: 'Absorbed easily, as the Oct 9 tranche was.' },
    confirm: 'Price and volume Mon Oct 26 to Fri Oct 30 (Oct 24 is a Saturday)' },
- { id: 'L2', act: 2, theme: 'vault', title: 'The big unlock: about 1.37B shares', date: 'Second trading day after the Q3 release (date not set)', sort: '2026-11-16', src: ['s424'],
+ { id: 'L2', act: 2, theme: 'vault', title: 'The big unlock: up to 1.3B shares', date: 'Thu Oct 22, 2026 (second full Nasdaq trading day after the Oct 20 after-close Q3 release)', sort: '2026-10-22', src: ['s424'],
    group: 'near', w: 0.08, bucket: 'capital', missHit: -0.17,
-   fact: 'About <b>1.37B shares</b> (911.5M plus 455.8M conditional), 28% of the 180-day pool, unlock on the second full trading day after the Q3 results (prospectus p. 259).',
+   fact: 'The big unlock: up to <b>1.3B shares</b>, 28% of the 180-day lock-up shares, on the second full trading day after the Q3 results (prospectus p. 259). The 911.5M and 455.8M rows were tied to the First Earnings Release Date (Q2 results, unlocked in August), not Q3.',
    factSrc: ['s424'],
    o: { miss: 'A weak print plus the unlock pushes the stock to a close below $135 on heavy volume within five trading days of the unlock.', neutral: 'Supply caps the stock in its September range.', bull: 'A strong print soaks up the supply.' },
    confirm: 'Price and volume two trading days after the Q3 release' },
@@ -103,14 +106,14 @@ window.EVENTS = [
    confirm: 'Price Tue Dec 8 to Mon Dec 14' },
  { id: 'L4', act: 2, theme: 'orbit', title: 'Starlink pricing power', date: 'FY2027 annual report, about Feb 2028 (our estimate; date not set)', sort: '2028-02-28', src: ['q10'],
    group: 'long', w: 0.12, bucket: 'conn', missHit: -0.166,
-   fact: 'Starlink had <b>12.0M subscribers</b> (6.0M a year earlier) and <b>$66</b> monthly revenue per subscriber (down from $85). Connectivity earned a <b>61%</b> segment EBITDA margin in Q2.',
-   factSrc: ['q10'],
-   o: { miss: 'Revenue per subscriber keeps falling and Starlink is valued like a utility.', neutral: 'Subscribers grow about 25% a year; pricing stabilizes.', bull: 'V3 capacity (1 Tbps per satellite) lifts enterprise, aviation and maritime sales.' },
+   fact: 'Starlink had <b>13.6M consumer subscribers</b> at Sep 30 (12.0M at Jun 30; 7.2M a year earlier) and consumer ARPU of <b>$69</b>/month (up from $66 in Q2; $83 a year earlier). Connectivity revenue was <b>$5.25B</b> in Q3 (Q2 $4.29B; Q3 2025 $3.10B).',
+   factSrc: ['q3'],
+   o: { miss: 'Revenue per subscriber resumes falling (Q3 ARPU $69, up from $66) and Starlink is valued like a utility.', neutral: 'Subscribers grow about 25% a year; pricing stabilizes.', bull: 'V3 capacity (1 Tbps per satellite) lifts enterprise, aviation and maritime sales.' },
    confirm: 'FY2027 10-K, about Feb 2028' },
 
- { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Date not set (press report of an FAA planning slide: no earlier than Nov 8, 2026)', sort: '2026-11-08', src: ['aishift', 'nsf'],
+ { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Targeted for next month (Musk, Oct 20 call); no specific date given. Nov 8 earliest is from press reports of an FAA planning slide', sort: '2026-11-08', src: ['spacecom', 'cnbcq3', 'aishift', 'nsf'],
    group: 'near', w: 0.20, bucket: 'starship',
-   fact: 'Flight 14 reached orbit on <b>Sep 28, 2026</b> and deployed <b>26 Starlink V3 satellites</b>. Flight 15 has no SpaceX-announced date or license; a ship catch is not confirmed.',
+   fact: 'Flight 14 reached orbit on <b>Sep 28, 2026</b> and deployed <b>26 Starlink V3 satellites</b>. Flight 15 is targeted for next month (Musk, Oct 20 call); SpaceX will attempt to catch both booster and ship. No specific date given (Space.com, CNBC, press).',
    factSrc: ['f14', 'nsf'],
    o: { miss: 'Anomaly, or no Flight 15 by Dec 31. Every later gate slips.', neutral: 'Flies cleanly with ocean recoveries; no catch.', bull: 'Clean flight and recovered hardware: reuse is on the clock.' },
    confirm: 'Flight 15 itself (date not set)' },
@@ -122,7 +125,7 @@ window.EVENTS = [
    confirm: 'Flight 16 itself (date not set)' },
  { id: 'G3', act: 3, gate: 3, theme: 'launch', title: 'Gate 3: outside customers fly on Starship', date: 'Date not set', sort: '2027-09-01', src: ['q10'],
    group: 'long', w: 0.10, bucket: 'starship',
-   fact: 'To date all Starship launches are classified as internal (10-Q). Space segment revenue was <b>$0.96B</b> in Q2; Falcon 9 cut launch cost to about $2,700/kg vs a $18,500/kg historical average (prospectus citing NASA).',
+   fact: 'To date all Starship launches are classified as internal (10-Q). Space segment revenue was <b>$0.96B</b> in Q2; the first Falcon 9 (2010) cut launch cost to about $2,700/kg, about 85% below the $18,500/kg historical average (prospectus citing NASA).',
    factSrc: ['q10', 's424'],
    o: { miss: 'No outside payloads before 2028; Starship stays an internal cost.', neutral: 'A handful of government and commercial payloads in 2027-28.', bull: 'Starship gets its own revenue line; launch cost heads toward ~$500/kg by 2030 (Morgan Stanley view).' },
    confirm: 'Space segment disclosures in 10-Qs' },
