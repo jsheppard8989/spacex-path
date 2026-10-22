@@ -7,7 +7,7 @@
   const pct = x => (x >= 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
   const L = { near: { bull: Math.log(A.b3m / A.spot), neutral: Math.log(A.n3m / A.spot) }, long: { bull: Math.log(A.b3y / A.b3m), neutral: Math.log(A.n3y / A.n3m) } };
   const srcLinks = keys => (keys || []).map(k => SRC[k] ? '<a href="' + SRC[k].u + '" target="_blank" rel="noopener">' + SRC[k].t + '</a>' : '').join(' · ');
-  let PR = { spcx: { price: 148.62, shares: 13.57e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-15 close (America/Chicago)' };
+  let PR = { spcx: { price: 144.75, shares: 13.579e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-22 close (America/Chicago)' };
 
   /* ---------- prices (local data file; embedded fallback for file://) ---------- */
   function applyPrices() {
@@ -159,8 +159,8 @@
   let picks = {}, side = null, cur = null, busy = false, showEnd = false;
   const ANIM_MS = () => window.SPCX_ANIM_MS || 2200;
   const ACTS = {
-    1: { name: 'Act I · Compute', line: 'SpaceX rents GPU capacity it powers and runs. It earns the spread between the rental price and chips plus power, wide while compute is scarce.', fact: 'Company-wide installed GPU power was 1.4 gigawatts at Jun 30, 2026 (10-Q). Anthropic pays $1.25B a month through May 2029; after an initial three-month period, either side can end it on 90 days\u2019 notice (prospectus p. 14).', src: ['q10', 's424'] },
-    2: { name: 'Act II · Launch & Starlink', line: 'Launch is the tollbooth: anyone who needs mass in orbit pays SpaceX\u2019s price, and Starlink turns cheap launches into subscription cash.', fact: 'Starlink: 12.0M subscribers, 61% Connectivity margin in Q2 (10-Q). Up to about 2.04B IPO shares unlock between Oct 24 and Dec 8 (prospectus pp. 258–259).', src: ['q10', 's424'] },
+    1: { name: 'Act I · Compute', line: 'SpaceX rents GPU capacity it powers and runs. It earns the spread between the rental price and chips plus power, wide while compute is scarce.', fact: 'Company-wide installed GPU power was 1.7 GW nameplate at Sep 30, 2026 (1.4 GW Jun 30; 0.6 GW Sep 30, 2025) (Q3 8-K). Anthropic pays $1.25B a month through May 2029; after an initial three-month period, either side can end it on 90 days\u2019 notice (prospectus p. 14).', src: ['q10', 's424'] },
+    2: { name: 'Act II · Launch & Starlink', line: 'Launch is the tollbooth: anyone who needs mass in orbit pays SpaceX\u2019s price, and Starlink turns cheap launches into subscription cash.', fact: 'Starlink: 13.6M consumer subscribers at Q3 (8-K EX-99.1). IPO lock-up releases: Oct 22 up to 1.3B shares; Oct 24 up to 328.4M; Dec 8 up to 328.4M or 797.6M; about 1.96B to 2.43B in total Oct 22 to Dec 8 (prospectus pp. 258–259; totals our arithmetic).', src: ['q3', 's424'] },
     3: { name: 'Act III · Starship gates', line: 'Starship is five yes/no gates. Each one opens the next; a miss at an early gate delays every later one.', fact: 'Gate 0 is passed: Flight 14 reached orbit on Sep 28, 2026 and deployed 26 Starlink V3 satellites (SpaceX).', src: ['f14'] }
   };
   function gateClosed(e) { if (!e.gate) return false; return ORDER.some(x => x.gate && x.gate < e.gate && picks[x.id] === 'miss'); }
@@ -285,7 +285,7 @@
       if (seg === seq.length && $('#fEndNum')) { $('#fEndNum').textContent = (elonUsed && elonActive() ? 'Elon\u2019s plan, scenario if his targets are hit. ' : '') + 'Final scenario price ' + fmtP(fr.price) + ' · market cap ' + fmtC(fr.cap) + ' · of which orbital add-on +' + fmtP(fr.orbPS) + ' (scenario).'; }
       $('#fPrice').textContent = fmtP(pr.price); $('#fCap').textContent = fmtC(pr.cap); $('#fBar').style.width = (t / total * 100).toFixed(1) + '%';
       if (seg !== last) { last = seg;
-        if (seg === -1) { $('#fStep').textContent = 'Start · Oct 15, 2026 close'; $('#fCapn').innerHTML = '<b>Liftoff.</b> SPCX at $' + A.spot.toFixed(2) + ' (' + fmtC(A.spot * A.shares) + '). Flight 14 reached orbit on Sep 28. Your 14 picks play out in date order.'; }
+        if (seg === -1) { $('#fStep').textContent = 'Start · Oct 22, 2026 close'; $('#fCapn').innerHTML = '<b>Liftoff.</b> SPCX at $' + A.spot.toFixed(2) + ' (' + fmtC(A.spot * A.shares) + '). Flight 14 reached orbit on Sep 28. Your 14 picks play out in date order.'; }
         else if (seg < seq.length) { const e = seq[seg], pk = picks[e.id]; $('#fStep').innerHTML = (seg + 1) + ' / ' + seq.length + ' · ' + (/^date not set/i.test(e.date) ? 'date not set, placed ~' : '') + fmtMon(e.sort) + ' · <span class="tg ' + pk + ' on">' + pk.toUpperCase() + '</span>'; $('#fCapn').innerHTML = '<span class="fdate">' + e.date.split('(')[0].replace(/\.\s*$/, '') + '</span><b>' + e.title + '</b><br>' + e.o[pk]; }
         else { $('#fStep').textContent = 'Ending'; $('#fCapn').innerHTML = '<b>' + ENDS[k].title + '</b><br><span id="fEndNum"></span>'; }
         $('#fCapn').classList.toggle('top', seg === seq.length);
@@ -373,7 +373,7 @@
       ['Digital human augmentation', U, '$0', 'Strategy list (prospectus p. 11). No revenue disclosed.'],
       ['Optimus humanoid robots, robotaxis', T, 'Not in SPCX math. These are Tesla businesses; robots appear only as Starship payloads in the illustrations.', srcLinks(['optimus', 't10q'])],
       ['Direct-to-cell / Starlink Mobile (the phone business)', N, 'Not priced as its own line, and the game adds nothing for it (our Connectivity target already folds in a small probability-weighted mobile option). <b>Max upside:</b> our <i class="scen">$50B</i> mobile option ≈ <i class="scen">+$' + (50e9 / A.shares).toFixed(2) + '</i> per share, about ' + (50e9 / (A.spot * A.shares) * 100).toFixed(1) + '% of today\u2019s cap (basis: $50B ÷ 13.57B shares; the $50B is our weighting of MoffettNathanson and Besen scenarios). Even bullish third-party scenarios put the whole carrier option at about 1-12% of the cap (our arithmetic).', 'FCC grant DA 26-1078 (15,000 direct-to-phone satellites); EchoStar spectrum (10-Q). ' + srcLinks(['da', 'q10'])],
-      ['Tesla merger', N, 'Speculative, no merger announced. <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps (SPCX at the Oct 15, 2026 close, Tesla at the Oct 12, 2026 close); Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge'])]
+      ['Tesla merger', N, 'No merger announced. Musk said on the Oct 20 call that Tesla and SpaceX boards formed special committees of independent directors to discuss a potential merger (press-reported, CNBC). No 8-K on it (EDGAR filings list checked Oct 22: latest is the Oct 20 8-K, Items 2.02/9.01 only). <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps (SPCX at the Oct 22, 2026 close, Tesla at the Oct 12, 2026 close); Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge', 'cnbcq3'])]
     ];
     $('#streamsOut').innerHTML = '<div class="tblwrap"><table class="streams"><thead><tr><th>Revenue stream</th><th>Status</th><th>How the 2030 targets price it (bull / base / bear, our research)</th><th>Source</th></tr></thead><tbody>' +
       rows.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td class="s">' + r[3] + '</td></tr>').join('') + '</tbody></table></div>' +
@@ -393,7 +393,7 @@
   mathModal.addEventListener('click', e => { if (e.target === mathModal || e.target.classList.contains('mclose')) closeMath(); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && !mathModal.hidden) closeMath(); });
   ['#dGw', '#dRate', '#dMult', '#dOrb'].forEach(s => $(s).addEventListener('input', lab));
-  document.querySelectorAll('[data-mark]').forEach(b => b.addEventListener('click', () => { const m = { q2: [1.4, 7.3], cons: [4.1, 17.6], bull: [10, 14] }[b.dataset.mark]; $('#dGw').value = m[0]; $('#dRate').value = m[1]; lab(); }));
+  document.querySelectorAll('[data-mark]').forEach(b => b.addEventListener('click', () => { const m = { q2: [1.7, 17.8], cons: [4.1, 17.6], bull: [10, 14] }[b.dataset.mark]; $('#dGw').value = m[0]; $('#dRate').value = m[1]; lab(); }));
   lab();
   renderGame();
 })();
