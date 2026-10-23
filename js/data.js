@@ -82,8 +82,8 @@ window.EVENTS = [
    confirm: 'An 8-K or prospectus supplement for new debt or shares' },
  { id: 'C5', act: 1, theme: 'datacenter', title: 'After the contract window: what compute rents for', date: 'May 2029 (Anthropic term ends; prospectus p. 14)', sort: '2029-05-31', src: ['s424'],
    group: 'long', w: 0.14, bucket: 'ai', missHit: -0.212,
-   fact: 'Consensus prices rented compute at about <b>$17.60 per watt across 4.1 gigawatts</b>, and each +$10/W adds more than $40B of revenue (<a href="https://www.benzinga.com/analyst-stock-ratings/reiteration/26/10/62166196/spacex-is-cheap-and-getting-cheaper-morgan-stanley-says" target="_blank" rel="noopener">Morgan Stanley note, Oct 4, via Benzinga</a>). Q3 AI revenue works out to about $17.8B per gigawatt a year on the company-wide 1.7 gigawatts at Sep 30, 2026 (Q3\'s $7.56B, annualized × 4, ÷ 1.7; Q2 was about $7.3B on 1.4 gigawatts; our arithmetic). Q3 AI revenue includes Cursor and Grok, not only rented compute.',
-   factSrc: ['benz', 'q3', 'q10'],
+   fact: 'Consensus prices rented compute at about <b>$17.60 per watt across 4.1 gigawatts</b>, and each +$10/W adds more than $40B of revenue (<a href="https://www.benzinga.com/analyst-stock-ratings/reiteration/26/10/62166196/spacex-is-cheap-and-getting-cheaper-morgan-stanley-says" target="_blank" rel="noopener">Morgan Stanley note, Oct 4, via Benzinga</a>). Q3 AI revenue works out to about $17.8B per gigawatt a year on the company-wide 1.7 gigawatts at Sep 30, 2026 (Q3\'s $7.56B, annualized × 4, ÷ 1.7; our arithmetic). Q3 AI revenue includes Cursor and Grok, not only rented compute.',
+   factSrc: ['benz', 'q3'],
    o: { miss: 'Rental prices reset toward $8 to $10 a watt as hyperscalers bring their own capacity online.', neutral: 'Prices drift down to consensus as contracts roll.', bull: 'Compute stays scarce; renewals price at or above today.' },
    confirm: 'Renewal terms disclosed around May 2029' },
 
