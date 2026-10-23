@@ -1,6 +1,7 @@
 /* All facts carry a source key; see SOURCES below. Scenario numbers are labeled. */
 window.SRC = {
   q3: { t: 'SpaceX Q3 2026 results, EX-99.1 to 8-K filed Oct 20, 2026 (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026066482/spaceexplorationtechnologi.htm' },
+  edgar8k: { t: 'SEC EDGAR, SpaceX 8-K filings list (checked Oct 23, 2026)', u: 'https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=1181412&type=8-K' },
   cnbcq3: { t: 'CNBC Q3 2026 earnings live updates, Oct 20, 2026 (press)', u: 'https://www.cnbc.com/2026/10/20/spacex-spcx-earnings-live-updates-q3-2026html.html' },
   spacecom: { t: 'Space.com, Oct 2026: SpaceX will attempt double Starship catch on next test launch (press)', u: 'https://www.space.com/space-exploration/launches-spacecraft/spacex-will-attempt-1st-ever-double-starship-rocket-catch-on-next-test-launch-a-profound-technology-milestone-elon-musk-says' },
   q10: { t: 'SpaceX Q2 2026 10-Q (SEC)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm' },
@@ -57,8 +58,8 @@ window.BUCKETS = {
 window.EVENTS = [
  { id: 'C1', act: 1, theme: 'datacenter', title: "Google's grace period ends", date: 'Grace period ends about Sat Oct 31, 2026; graded at the Q3 10-Q (due by Mon Nov 16, 2026)', dateNote: 'filing', sort: '2026-10-31', src: ['gfwp', 'form10q'],
    group: 'near', w: 0.18, bucket: 'ai', missHit: -0.184,
-   fact: 'Google pays <b>$920M a month</b> from October for about 110,000 GPUs. If SpaceX did not deliver the committed GPUs by Sep 30, 2026, Google can, after a one-month grace period, end the deal or take the GPUs delivered at a pro rata lower fee (SEC filing). As of Oct 13, SpaceX has not said whether it met the Sep 30 deadline.',
-   factSrc: ['gfwp'],
+   fact: 'Google pays <b>$920M a month</b> from October for about 110,000 GPUs. If SpaceX did not deliver the committed GPUs by Sep 30, 2026, Google can, after a one-month grace period, end the deal or take the GPUs delivered at a pro rata lower fee (SEC filing). As of Oct 23, SpaceX has not said whether it met the Sep 30 deadline: its Q3 results release (8-K, Oct 20), EDGAR (no later 8-K) and CNBC\'s coverage of the Q3 call do not address it.',
+   factSrc: ['gfwp', 'q3', 'edgar8k', 'cnbcq3'],
    o: { miss: 'By the Q3 10-Q (due by Nov 16), SpaceX discloses that Google ended the deal or took partial capacity at a reduced fee.', neutral: 'The Q3 10-Q is silent on delivery; payments continue.', bull: 'By the Q3 10-Q (due by Nov 16), SpaceX confirms full delivery and the full $920M a month.' },
    confirm: 'Q3 report / 10-Q (due by Nov 16, 2026)' },
  { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Released Tue Oct 20, 2026 (8-K, after the close). 10-Q still due by Mon Nov 16, 2026', sort: '2026-10-20', src: ['q3', 'form10q'],
@@ -81,8 +82,8 @@ window.EVENTS = [
    confirm: 'An 8-K or prospectus supplement for new debt or shares' },
  { id: 'C5', act: 1, theme: 'datacenter', title: 'After the contract window: what compute rents for', date: 'May 2029 (Anthropic term ends; prospectus p. 14)', sort: '2029-05-31', src: ['s424'],
    group: 'long', w: 0.14, bucket: 'ai', missHit: -0.212,
-   fact: 'Consensus prices rented compute at about <b>$17.60 per watt across 4.1 gigawatts</b>, and each +$10/W adds more than $40B of revenue (<a href="https://www.benzinga.com/analyst-stock-ratings/reiteration/26/10/62166196/spacex-is-cheap-and-getting-cheaper-morgan-stanley-says" target="_blank" rel="noopener">Morgan Stanley note, Oct 4, via Benzinga</a>). Q2 AI revenue works out to about $7.3B per gigawatt a year on the company-wide 1.4 gigawatts (our arithmetic).',
-   factSrc: ['benz', 'q10'],
+   fact: 'Consensus prices rented compute at about <b>$17.60 per watt across 4.1 gigawatts</b>, and each +$10/W adds more than $40B of revenue (<a href="https://www.benzinga.com/analyst-stock-ratings/reiteration/26/10/62166196/spacex-is-cheap-and-getting-cheaper-morgan-stanley-says" target="_blank" rel="noopener">Morgan Stanley note, Oct 4, via Benzinga</a>). Q3 AI revenue works out to about $17.8B per gigawatt a year on the company-wide 1.7 gigawatts at Sep 30, 2026 (Q3\'s $7.56B, annualized × 4, ÷ 1.7; Q2 was about $7.3B on 1.4 gigawatts; our arithmetic). Q3 AI revenue includes Cursor and Grok, not only rented compute.',
+   factSrc: ['benz', 'q3', 'q10'],
    o: { miss: 'Rental prices reset toward $8 to $10 a watt as hyperscalers bring their own capacity online.', neutral: 'Prices drift down to consensus as contracts roll.', bull: 'Compute stays scarce; renewals price at or above today.' },
    confirm: 'Renewal terms disclosed around May 2029' },
 
