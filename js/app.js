@@ -27,7 +27,7 @@
       const p = picks[e.id]; if (!p) return;
       if (p === 'miss') { missed[e.bucket] = true; if (e.bucket === 'ai') aiHits.push(e); }
       else logSum += e.w * L[e.group][p];
-      if (e.group === 'long') shares += e.w * (A.sh3y[p] - 13.57e9);
+      if (e.group === 'long') shares += e.w * (A.sh3y[p] - 13.579e9);
     });
     const hits = [];
     if (missed.ai) {
@@ -35,7 +35,7 @@
       if (ids.includes('C3') && (ids.includes('C1') || ids.includes('C5'))) hits.push(['ai', B.ai.both, 'both contracts lost / re-let at reset prices']);
       else { const worst = aiHits.reduce((m, e) => e.missHit < m.missHit ? e : m); hits.push(['ai', worst.missHit, worst.title]); }
     }
-    if (missed.capital) { hits.push(['capital', B.capital.hit, 'raise / supply stress']); shares += A.shRaise - 13.57e9; }
+    if (missed.capital) { hits.push(['capital', B.capital.hit, 'raise / supply stress']); shares += A.shRaise - 13.579e9; }
     if (missed.conn) hits.push(['conn', B.conn.hit, 'Starlink derating']);
     let core = A.spot * Math.exp(logSum); hits.forEach(h => core *= (1 + h[1]));
     const g5 = picks.G5, ow = g5 ? ORBW[g5] : 0, orbPS = ow * orbValue() / shares, price = core + orbPS;
@@ -129,7 +129,7 @@
       '<div class="mprev"><canvas></canvas><span>Press ▶ Play on any outcome to watch it (illustration)</span></div>' +
       '<div class="card-fact">' + e.fact + ' <span class="s">Source: ' + srcLinks(e.factSrc) + '</span></div>' +
       '<div class="ocs">' + ['miss', 'neutral', 'bull'].map(p => outcomeBlock(e, p)).join('') + '</div>' +
-      '<p class="note">Standalone moves from $' + A.spot.toFixed(2) + ' / ' + fmtC(A.spot * A.shares) + ' on 13.57B shares. In the game, misses stack by bucket (downside overlap rules), not one by one. Confirming event: ' + e.confirm + '.</p>' + (withPick || '');
+      '<p class="note">Standalone moves from $' + A.spot.toFixed(2) + ' / ' + fmtC(A.spot * A.shares) + ' on 13.58B shares. In the game, misses stack by bucket (downside overlap rules), not one by one. Confirming event: ' + e.confirm + '.</p>' + (withPick || '');
   }
 
   /* ---------- calendar ---------- */
@@ -171,7 +171,7 @@
       'Log-move = ln(target ÷ start): near-term 2026 events use the 3-month bull $210 / base $165; 2027+ events the 3-year targets with the earlier orbital option stripped out: bull $275.03 / base $138.15 (were $310 / $145). ' +
       'Bucket hits (downside estimate, each counted once): AI −18% to −25% (−43.4% if a termination plus a second AI miss), capital −8%, Starlink −16.6%. Starship misses carry no separate hit: the earlier −7.85% downside estimate was the orbital option, now carried by the add-on. ' +
       '+ Orbital add-on (scenario) = gate-5 weight (Bull 100% / Neutral 25% / Miss 0%) × ' + ORB.gw.toFixed(1) + ' gigawatts × $' + ORB.rate.toFixed(1) + 'B × ' + ORB.mult.toFixed(1) + 'x ÷ shares. ' +
-      'Now: exp-term ' + r.logSum.toFixed(3) + (r.hits.length ? '; hits ' + r.hits.map(h => B[h[0]].name + ' ' + pct(h[1])).join(', ') : '') + '; core ' + fmtP(r.core) + ' + orbital ' + fmtP(r.orbPS) + '. Market cap = price × ' + (r.shares / 1e9).toFixed(2) + 'B shares.';
+      'Now: exp-term (the Σ inside exp() above) ' + r.logSum.toFixed(3) + (r.hits.length ? '; hits ' + r.hits.map(h => B[h[0]].name + ' ' + pct(h[1])).join(', ') : '') + '; core ' + fmtP(r.core) + ' + orbital ' + fmtP(r.orbPS) + '. Market cap = price × ' + (r.shares / 1e9).toFixed(2) + 'B shares.';
   }
   function updHUD() {
     const r = evalPath(picks); $('#gPrice').textContent = fmtP(r.price); $('#gCap').textContent = fmtC(r.cap);
@@ -357,7 +357,7 @@
     const sc = (b, n, r) => '<i class="scen">' + b + '</i> / <i class="scen">' + n + '</i> / <i class="scen">' + r + '</i>';
     const N = '<span class="st np">NOT PRICED</span>', P = '<span class="st pr">PRICED</span>', W = '<span class="st pw">PRICED WITHIN</span>', U = '<span class="st un">UNPRICED</span>', T = '<span class="st te">NOT SPACEX</span>';
     const rows = [
-      ['Starlink broadband: consumer, enterprise, maritime, aviation', P, 'Connectivity EBITDA ' + sc('$50B × 30x', '$38B × 24x', '$28B × 18x'), 'Q2 Connectivity $4.29B; consumer $2.49B, enterprise &amp; government $1.81B. ' + srcLinks(['q10'])],
+      ['Starlink broadband: consumer, enterprise, maritime, aviation', P, 'Connectivity EBITDA (earnings before interest, taxes, depreciation and amortization) ' + sc('$50B × 30x', '$38B × 24x', '$28B × 18x'), 'Q2 Connectivity $4.29B; consumer $2.49B, enterprise &amp; government $1.81B. ' + srcLinks(['q10'])],
       ['Starshield / government satellite services', W, 'Inside Connectivity (enterprise &amp; government) and the Space line ' + sc('$400B', '$250B', '$175B') + ' value', 'No separate disclosure. ' + srcLinks(['q10'])],
       ['Falcon and Starship launch for outside customers, NASA cargo and crew, national-security launch', P, 'Space line ' + sc('$400B', '$250B', '$175B') + ' value', srcLinks(['s424'])],
       ['NASA Human Landing System (Moon lander)', W, 'Inside the Space line', 'Starship is NASA\u2019s Human Landing System for Artemis (prospectus p. 187). ' + srcLinks(['s424'])],
@@ -373,7 +373,7 @@
       ['Digital human augmentation', U, '$0', 'Strategy list (prospectus p. 11). No revenue disclosed.'],
       ['Optimus humanoid robots, robotaxis', T, 'Not in SPCX math. These are Tesla businesses; robots appear only as Starship payloads in the illustrations.', srcLinks(['optimus', 't10q'])],
       ['Direct-to-cell / Starlink Mobile (the phone business)', N, 'Not priced as its own line, and the game adds nothing for it (our Connectivity target already folds in a small probability-weighted mobile option). <b>Max upside:</b> our <i class="scen">$50B</i> mobile option ≈ <i class="scen">+$' + (50e9 / A.shares).toFixed(2) + '</i> per share, about ' + (50e9 / (A.spot * A.shares) * 100).toFixed(1) + '% of today\u2019s cap (basis: $50B ÷ 13.57B shares; the $50B is our weighting of MoffettNathanson and Besen scenarios). Even bullish third-party scenarios put the whole carrier option at about 1-12% of the cap (our arithmetic).', 'FCC grant DA 26-1078 (15,000 direct-to-phone satellites); EchoStar spectrum (10-Q). ' + srcLinks(['da', 'q10'])],
-      ['Tesla merger', N, 'No merger announced. Musk said on the Oct 20 call that Tesla and SpaceX boards formed special committees of independent directors to discuss a potential merger (press-reported, CNBC). No 8-K on it (EDGAR filings list checked Oct 22: latest is the Oct 20 8-K, Items 2.02/9.01 only). <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps (SPCX at the Oct 22, 2026 close, Tesla at the Oct 12, 2026 close); Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge', 'cnbcq3'])]
+      ['Tesla merger', N, 'No merger announced. Musk said on the Oct 20 call that Tesla and SpaceX boards formed special committees of independent directors to discuss a potential merger (press-reported, CNBC). No 8-K on it (EDGAR filings list checked Oct 22: latest is the Oct 20 8-K, Items 2.02/9.01 only, i.e. results plus exhibits). <b>Max upside if it happened:</b> combined value of ~<i class="scen">' + fmtC(A.spot * A.shares + tslaCap()) + '</i> (basis: SPCX ' + fmtC(A.spot * A.shares) + ' + Tesla ' + fmtC(tslaCap()) + ' market caps (SPCX at the Oct 22, 2026 close, Tesla at the Oct 12, 2026 close, not refreshed); Tesla = $378.03 × 3.95B shares as of Jul 16, 2026 (Q2 10-Q), a simple sum with no deal premium or synergies). A share swap at market prices adds no value per SPCX share by itself.', 'Tesla cap: ' + srcLinks(['tmc']) + '; no deal: ' + srcLinks(['rmerge', 'cnbcq3'])]
     ];
     $('#streamsOut').innerHTML = '<div class="tblwrap"><table class="streams"><thead><tr><th>Revenue stream</th><th>Status</th><th>How the 2030 targets price it (bull / base / bear, our research)</th><th>Source</th></tr></thead><tbody>' +
       rows.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td><td class="s">' + r[3] + '</td></tr>').join('') + '</tbody></table></div>' +
