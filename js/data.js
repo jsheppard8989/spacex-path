@@ -89,7 +89,7 @@ window.EVENTS = [
 
  { id: 'L1', act: 2, theme: 'vault', title: '135-day lock-up tranche', date: 'On or after Sat Oct 24, 2026', sort: '2026-10-24', src: ['s424'],
    group: 'near', w: 0.06, bucket: 'capital', missHit: -0.17,
-   fact: 'Up to <b>328.4M shares</b> become eligible for sale (prospectus lock-up table, p. 259). Schedule: Oct 22 up to 1.3B; Oct 24 up to 328.4M; Dec 8 up to 328.4M or 797.6M (depends on whether “Additional Release Shares”, an early release the prospectus allowed, went out at the “First Earnings Release Date”, the first results release after the IPO). Total Oct 22–Dec 8: about 1.96B to 2.43B (pp. 258–259; totals our arithmetic).',
+   fact: 'Up to <b>328.4M shares</b> become eligible for sale (prospectus lock-up table, p. 259). Schedule: Oct 22: up to 1.3B; Oct 24: up to 328.4M; Dec 8: up to 797.6M (the early release of extra shares did not happen: it needed closes of $175.50 or more, 30% above the $135 IPO price, on 5 of the 10 trading days up to the early-August Q2 results, and the stock closed at about $108–$125 then). Total Oct 22–Dec 8: about 2.43B (prospectus pp. 259–260; total is our arithmetic).',
    factSrc: ['s424'],
    o: { miss: 'Heavy selling; the stock closes below the $135 IPO price in the first five trading days (Mon Oct 26 to Fri Oct 30).', neutral: 'Some selling, absorbed within the recent range.', bull: 'Absorbed easily, as the Oct 9 tranche was.' },
    confirm: 'Price and volume Mon Oct 26 to Fri Oct 30 (Oct 24 is a Saturday)' },
@@ -101,7 +101,7 @@ window.EVENTS = [
    confirm: 'Price and volume two trading days after the Q3 release' },
  { id: 'L3', act: 2, theme: 'vault', title: '180-day lock-up ends', date: 'Tue Dec 8, 2026', sort: '2026-12-08', src: ['s424'],
    group: 'near', w: 0.06, bucket: 'capital', missHit: -0.17,
-   fact: 'Up to <b>797.6M shares</b> (the early-release condition was not met) (prospectus p. 259; market price history).',
+   fact: 'Up to <b>797.6M shares</b> (the early-release condition was not met: closes were about $108–$125 in the 10 trading days to the Aug 4 Q2 results, below the $175.50 trigger) (prospectus pp. 259–260; market price history).',
    factSrc: ['s424'],
    o: { miss: 'The stock closes below $135 within five trading days of the unlock (Tue Dec 8 to Mon Dec 14).', neutral: 'Holds its range.', bull: 'Holds above $150 through Dec 8; supply absorbed.' },
    confirm: 'Price Tue Dec 8 to Mon Dec 14' },
