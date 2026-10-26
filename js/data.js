@@ -43,7 +43,7 @@ window.SRC = {
 };
 
 /* Scenario anchors (OPINION) */
-window.ANCHORS = { spot: 144.75, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
+window.ANCHORS = { spot: 147.49, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
   sh3y: { bull: 14.3e9, neutral: 14.6e9, miss: 15.2e9 }, shRaise: 13.98e9 };
 
 /* Downside bucket hits (downside estimates) */
@@ -64,7 +64,7 @@ window.EVENTS = [
    confirm: 'Q3 report / 10-Q (due by Nov 16, 2026)' },
  { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Released Tue Oct 20, 2026 (8-K, after the close): results out, final grade pending. 10-Q due by Mon Nov 16, 2026', sort: '2026-10-20', src: ['q3', 'form10q'],
    group: 'near', w: 0.26, bucket: 'ai', missHit: -0.203,
-   fact: 'Released Tue Oct 20, 2026 (8-K, after the close). Revenue <b>$14.58B</b> ($14,575M); Solutions &amp; Infrastructure (SI, the AI segment) revenue <b>$7.56B</b>; net income <b>$4.40B</b> ($4,404M); operating income $2.8B. <b>Result so far:</b> SI revenue of $7.56B is above the $7B Bull bar, but capacity delivery is not yet confirmed, so results are out and the final grade is pending until the 10-Q (due by Mon Nov 16, 2026).',
+   fact: 'Released Tue Oct 20, 2026 (8-K, after the close). Revenue <b>$14.58B</b> ($14,575M); Super Intelligence (SI, formerly the AI segment) revenue <b>$7.56B</b>; net income <b>$4.40B</b> ($4,404M); operating income $2.8B. <b>Result so far:</b> SI revenue of $7.56B is above the $7B Bull bar, but capacity delivery is not yet confirmed, so results are out and the final grade is pending until the 10-Q (due by Mon Nov 16, 2026).',
    factSrc: ['q3'],
    o: { miss: 'AI revenue comes in under $5B with capex still about $18B a quarter.', neutral: 'AI revenue roughly in line; capex unchanged; Starlink ARPU (average revenue per user) flat.', bull: 'AI revenue at or above $7B and capacity delivery confirmed.' },
    confirm: 'Q3 10-Q, due by Mon Nov 16, 2026' },
@@ -126,8 +126,8 @@ window.EVENTS = [
    confirm: 'Flight 16 itself (date not set)' },
  { id: 'G3', act: 3, gate: 3, theme: 'launch', title: 'Gate 3: outside customers fly on Starship', date: 'Date not set', sort: '2027-09-01', src: ['q10'],
    group: 'long', w: 0.10, bucket: 'starship',
-   fact: 'To date all Starship launches are classified as internal (10-Q). Space segment revenue was <b>$0.96B</b> in Q2; the first Falcon 9 (2010) cut launch cost to about $2,700/kg, about 85% below the $18,500/kg historical average (prospectus citing NASA).',
-   factSrc: ['q10', 's424'],
+   fact: 'To date all Starship launches are classified as internal (10-Q). Space segment revenue was <b>$1.77B</b> in Q3 (up 84% from $0.96B in Q2; Q3 8-K); the first Falcon 9 (2010) cut launch cost to about $2,700/kg, about 85% below the $18,500/kg historical average (prospectus citing NASA).',
+   factSrc: ['q10', 'q3', 's424'],
    o: { miss: 'No outside payloads before 2028; Starship stays an internal cost.', neutral: 'A handful of government and commercial payloads in 2027-28.', bull: 'Starship gets its own revenue line; launch cost heads toward ~$500/kg by 2030 (Morgan Stanley view).' },
    confirm: 'Space segment disclosures in 10-Qs' },
  { id: 'G4', act: 3, gate: 4, theme: 'moon', title: 'Gate 4: Moon lander milestones (Human Landing System)', date: 'Date not set. NASA OIG (Mar 2026): propellant-transfer test slipped; uncrewed demo expected to slip to end-2026; Artemis III planned Jun 2027 (superseded; see Ars and Reuters). WSJ: uncrewed lunar landing target Mar 2027', sort: '2027-12-31', src: ['oig', 'wsj', 'ars', 'reutart'],

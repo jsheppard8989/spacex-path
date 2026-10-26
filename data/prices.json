@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-10-22 close (America/Chicago)",
+  "asOf": "2026-10-23 close (America/Chicago)",
   "spcx": {
-    "price": 144.75,
-    "priceSource": "Yahoo Finance chart API (SPCX, NasdaqGS), Oct 22, 2026 close (4:00 PM ET / 3:00 PM CT), pulled Oct 22 ~3:10 PM CT; matches Nasdaq.com quote \"Closed at Oct 22, 2026 4:00 PM ET\" $144.75 (market data, not an exchange record)",
+    "price": 147.49,
+    "priceSource": "Yahoo Finance chart API (SPCX, NasdaqGS), Oct 23, 2026 close (4:00 PM ET / 3:00 PM CT), pulled Mon Oct 26 ~8:28 AM CT before the open; matches Nasdaq.com quote \"Closed at Oct 23, 2026 4:00 PM ET\" $147.49 and Nasdaq historical 10/23/2026 close $147.49 (market data, not an exchange record)",
     "shares": 13.579e9,
     "sharesSource": "SpaceX Q3 2026 8-K EX-99.1: 8,240M Class A + 5,339M Class B outstanding at Sep 30, 2026",
     "ipoPrice": 135
