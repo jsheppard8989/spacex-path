@@ -43,7 +43,7 @@ window.SRC = {
 };
 
 /* Scenario anchors (OPINION) */
-window.ANCHORS = { spot: 147.49, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
+window.ANCHORS = { spot: 143.89, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
   sh3y: { bull: 14.3e9, neutral: 14.6e9, miss: 15.2e9 }, shRaise: 13.98e9 };
 
 /* Downside bucket hits (downside estimates) */
