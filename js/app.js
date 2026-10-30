@@ -7,7 +7,7 @@
   const pct = x => (x >= 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
   const L = { near: { bull: Math.log(A.b3m / A.spot), neutral: Math.log(A.n3m / A.spot) }, long: { bull: Math.log(A.b3y / A.b3m), neutral: Math.log(A.n3y / A.n3m) } };
   const srcLinks = keys => (keys || []).map(k => SRC[k] ? '<a href="' + SRC[k].u + '" target="_blank" rel="noopener">' + SRC[k].t + '</a>' : '').join(' · ');
-  let PR = { spcx: { price: 147.49, shares: 13.579e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-23 close (America/Chicago)' };
+  let PR = { spcx: { price: 143.89, shares: 13.579e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-23 close (America/Chicago)' };
 
   /* ---------- prices (local data file; embedded fallback for file://) ---------- */
   function applyPrices() {
