@@ -8,6 +8,7 @@
   const L = { near: { bull: Math.log(A.b3m / A.spot), neutral: Math.log(A.n3m / A.spot) }, long: { bull: Math.log(A.b3y / A.b3m), neutral: Math.log(A.n3y / A.n3m) } };
   const srcLinks = keys => (keys || []).map(k => SRC[k] ? '<a href="' + SRC[k].u + '" target="_blank" rel="noopener">' + SRC[k].t + '</a>' : '').join(' · ');
   let PR = { spcx: { price: 143.89, shares: 13.579e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-29 close (America/Chicago)' };
+  let picks = {}, side = null, cur = null, busy = false, showEnd = false;
 
   /* ---------- prices (local data file; embedded fallback for file://) ---------- */
   function applyPrices() {
@@ -63,47 +64,85 @@
   }
   window.SPCX = { evalPath, ending, standalone, ORB };
 
-  /* ---------- hero animation ---------- */
+  /* ---------- hero animation ----------
+     Smooth, frame-rate independent liftoff: 3 parallax star layers (pre-rendered once),
+     a layered glowing engine plume, soft sprite exhaust and smoke, eased pad light,
+     fade-through-black loop (no hard jump), pauses when off-screen or the tab is hidden.
+     prefers-reduced-motion: one static frame, no loop. */
   (function hero() {
-    const c = $('#heroCanvas'), ctx = c.getContext('2d'); const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let w, h, dpr; const parts = [], smoke = [];
-    const r = Scenes.rng(99), starL = Array.from({ length: 320 }, () => ({ x: r(), y: r() * 3, s: r() * 1.6 + .2, ph: r() * 6 }));
-    function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; }
-    size(); addEventListener('resize', size);
-    const CYCLE = 15000; let t0 = performance.now();
+    const c = $('#heroCanvas'), ctx = c.getContext('2d'); const mq = matchMedia('(prefers-reduced-motion: reduce)'); let reduce = mq.matches;
+    let w = 0, h = 0, dpr = 1; const parts = [], smoke = [];
+    const clamp = (v, a, b) => v < a ? a : v > b ? b : v, smooth = p => { p = clamp(p, 0, 1); return p * p * (3 - 2 * p); };
+    const noise = t => 0.5 * Math.sin(t * 0.021) + 0.3 * Math.sin(t * 0.047 + 1.3) + 0.2 * Math.sin(t * 0.093 + 2.1); // smooth flicker, -1..1
+    function sprite(r, stops) { const s = document.createElement('canvas'); s.width = s.height = r * 2; const g = s.getContext('2d'), gr = g.createRadialGradient(r, r, 0, r, r, r); stops.forEach(st => gr.addColorStop(st[0], st[1])); g.fillStyle = gr; g.fillRect(0, 0, r * 2, r * 2); return s; }
+    const FIRE = sprite(32, [[0, 'rgba(255,248,225,1)'], [0.25, 'rgba(255,196,110,.85)'], [0.6, 'rgba(255,110,40,.35)'], [1, 'rgba(255,80,20,0)']]);
+    const SMOKE = sprite(48, [[0, 'rgba(220,205,195,.55)'], [0.6, 'rgba(160,150,150,.22)'], [1, 'rgba(120,115,120,0)']]);
+    const r = Scenes.rng(99); let layers = [], twinkle = [];
+    function buildStars() { // 3 depth layers drawn once into offscreen canvases; far = small/dim, near = bigger/brighter
+      layers = [[0.04, 0.55, 180, 0.9], [0.10, 0.8, 90, 1.3], [0.22, 1, 40, 1.9]].map(([par, alpha, n, sz]) => {
+        const cv = document.createElement('canvas'); cv.width = Math.max(1, w * dpr); cv.height = Math.max(1, h * 1.2 * dpr); const g = cv.getContext('2d'); g.scale(dpr, dpr);
+        const k = Math.max(0.5, w * h / (1280 * 800)); for (let i = 0; i < n * k; i++) { const s = r() * sz + 0.3; g.fillStyle = 'rgba(' + (r() < 0.15 ? '255,226,190' : '235,242,255') + ',' + (alpha * (0.35 + 0.65 * r())).toFixed(2) + ')'; g.beginPath(); g.arc(r() * w, r() * h * 1.2, s / 2, 0, 6.283); g.fill(); }
+        return { cv, par };
+      });
+      twinkle = Array.from({ length: 26 }, () => ({ x: r(), y: r(), s: 1 + r() * 1.6, ph: r() * 6.283, sp: 0.0006 + r() * 0.0009 }));
+    }
+    const CYCLE = 15000, ign = 2200, FADE = 900; let clock = 0, last = 0, running = false, visible = true, raf = 0;
+    function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; buildStars(); if (reduce) frame(performance.now()); }
+    let rt; size(); addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 120); });
+    function plume(x, y, H, power, now) { // layered engine plume: wide warm bloom, long soft flame, white-hot core
+      const f = 1 + 0.08 * noise(now), L = H * (0.16 + 0.22 * power) * f, W = H * 0.05;
+      ctx.globalCompositeOperation = 'lighter';
+      Scenes.glow(ctx, x, y + L * 0.35, L * 1.35, 'rgba(255,140,60,' + (0.28 * power).toFixed(3) + ')');
+      const g = ctx.createLinearGradient(0, y, 0, y + L); g.addColorStop(0, 'rgba(255,250,235,' + (0.95 * power).toFixed(3) + ')'); g.addColorStop(0.25, 'rgba(255,200,120,' + (0.75 * power).toFixed(3) + ')'); g.addColorStop(0.7, 'rgba(255,110,40,' + (0.3 * power).toFixed(3) + ')'); g.addColorStop(1, 'rgba(255,80,20,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - W, y); ctx.bezierCurveTo(x - W * 1.5, y + L * 0.3, x - W * 0.4, y + L * 0.8, x, y + L); ctx.bezierCurveTo(x + W * 0.4, y + L * 0.8, x + W * 1.5, y + L * 0.3, x + W, y); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = power; ctx.drawImage(FIRE, x - W * 1.6, y - W * 0.8, W * 3.2, W * 3.2); ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+    }
     function frame(now) {
-      const t = reduce ? 1500 : (now - t0) % CYCLE; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const ign = 2200, tt = Math.max(0, t - ign) / 1000; const rise = tt > 0.6 ? 0.5 * 38 * Math.pow(tt - 0.6, 2.1) : 0;
+      raf = 0; const dt = reduce ? 0 : clamp(now - (last || now), 0, 50); last = now; clock += dt;
+      const t = reduce ? 1500 : clock % CYCLE, k60 = dt / 16.67; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const tt = Math.max(0, t - ign) / 1000; const rise = tt > 0.6 ? 0.5 * 38 * Math.pow(tt - 0.6, 2.1) : 0;
       const RX = w > 900 ? w * 0.74 : w * 0.5; const padY = h * 0.84, H = Math.min(h * 0.62, w * 1.1); let rocketY = padY - rise, cam = 0;
       if (rocketY < h * 0.55) { cam = h * 0.55 - rocketY; rocketY = h * 0.55; }
+      const power = smooth((t - ign) / 700), shake = reduce ? 0 : power * (1 - smooth(tt / 3)) * 1.2 * noise(now * 3);
       const g = ctx.createLinearGradient(0, 0, 0, h); const k = Math.min(1, cam / (h * 3));
-      g.addColorStop(0, '#01030a'); g.addColorStop(1, k > 0.5 ? '#02040c' : 'rgb(' + Math.round(40 - 34 * k) + ',' + Math.round(20 - 14 * k) + ',' + Math.round(52 - 40 * k) + ')');
+      g.addColorStop(0, '#01030a'); g.addColorStop(1, 'rgb(' + Math.round(40 - 34 * k) + ',' + Math.round(20 - 14 * k) + ',' + Math.round(52 - 40 * k) + ')');
       ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-      starL.forEach(s => { const y = ((s.y * h + cam * 0.15) % (h * 1.2)); const a = .3 + .7 * Math.abs(Math.sin(now * .0012 + s.ph)); ctx.fillStyle = 'rgba(255,255,255,' + (a * .8).toFixed(2) + ')'; ctx.fillRect(s.x * w, y, s.s, s.s); });
+      const drift = clock * 0.004; // slow sideways drift + vertical parallax as the camera follows the rocket
+      layers.forEach(L => { const LH = h * 1.2, oy = ((cam * L.par * 3) % LH + LH) % LH, ox = ((drift * L.par * 6) % w + w) % w;
+        for (let ix = -1; ix <= 0; ix++) for (let iy = -1; iy <= 0; iy++) ctx.drawImage(L.cv, ox + ix * w, oy + iy * LH, w, LH); });
+      twinkle.forEach(s => { const a = 0.15 + 0.6 * (0.5 + 0.5 * Math.sin(now * s.sp + s.ph)); ctx.globalAlpha = a; ctx.drawImage(FIRE, s.x * w - s.s * 2, ((s.y * h + cam * 0.3) % h) - s.s * 2, s.s * 4, s.s * 4); }); ctx.globalAlpha = 1;
+      ctx.save(); ctx.translate(shake, 0);
       const gy = padY + cam;
       if (gy < h + 200) {
-        Scenes.glow(ctx, RX, gy, w * 0.6, 'rgba(255,130,50,' + (t > ign ? 0.35 : 0.12) + ')');
-        ctx.fillStyle = '#07080b'; ctx.fillRect(0, gy, w, h);
+        Scenes.glow(ctx, RX, gy, w * 0.6, 'rgba(255,130,50,' + (0.12 + 0.26 * power * (1 + 0.06 * noise(now))).toFixed(3) + ')');
+        ctx.fillStyle = '#07080b'; ctx.fillRect(-4, gy, w + 8, h);
         ctx.fillStyle = '#0b0d11'; for (let i = 0; i < 12; i++) ctx.fillRect(w * (i / 12) + 10, gy - 6 - (i % 3) * 4, 24, 6 + (i % 3) * 4);
         Scenes.tower(ctx, RX + H * 0.12, gy, H * 1.02);
       }
-      // exhaust
-      if (t > ign && !reduce) {
-        const n = 14; for (let i = 0; i < n; i++) parts.push({ x: RX + (Math.random() - .5) * H * 0.05, y: rocketY, vx: (Math.random() - .5) * 1.2, vy: 6 + Math.random() * 6, life: 1 });
-        if (gy < h + 50) for (let i = 0; i < 3; i++) smoke.push({ x: RX + (Math.random() - .5) * 30, y: gy - 4, vx: (Math.random() - .5) * 7, vy: -Math.random() * 1.5, r: 10 + Math.random() * 20, life: 1 });
+      if (t > ign && !reduce) { // emission scaled by frame time so 30/60/120 Hz all look the same
+        const n = Math.round(5 * k60 * power + 0.4); for (let i = 0; i < n; i++) parts.push({ x: RX + (Math.random() - .5) * H * 0.04, y: rocketY + H * 0.02, vx: (Math.random() - .5) * 1.0, vy: 5 + Math.random() * 4, life: 1, s: 0.7 + Math.random() * 0.6 });
+        if (gy < h + 50 && Math.random() < 0.9 * k60) smoke.push({ x: RX + (Math.random() - .5) * 30, y: gy - 6, vx: (Math.random() - .5) * 5, vy: -Math.random() * 0.8, r: 14 + Math.random() * 18, life: 1 });
       }
-      for (let i = smoke.length - 1; i >= 0; i--) { const s = smoke[i]; s.x += s.vx; s.y += s.vy + (cam ? 0 : 0); s.r += 0.6; s.life -= 0.008; if (s.life <= 0) { smoke.splice(i, 1); continue; }
-        ctx.fillStyle = 'rgba(200,190,185,' + (s.life * 0.13).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(s.x, s.y + cam * 0.0, s.r, 0, 6.28); ctx.fill(); }
-      ctx.globalCompositeOperation = 'lighter';
-      for (let i = parts.length - 1; i >= 0; i--) { const p = parts[i]; p.x += p.vx; p.y += p.vy; p.life -= 0.045; if (p.life <= 0) { parts.splice(i, 1); continue; }
-        const col = p.life > .7 ? '255,245,220' : p.life > .4 ? '255,170,70' : '255,90,30'; ctx.fillStyle = 'rgba(' + col + ',' + (p.life * .55).toFixed(2) + ')'; ctx.beginPath(); ctx.arc(p.x, p.y, 3 + (1 - p.life) * 9, 0, 6.28); ctx.fill(); }
-      if (t > ign) { Scenes.glow(ctx, RX, rocketY + 6, H * 0.12, 'rgba(255,220,170,.9)'); }
-      ctx.globalCompositeOperation = 'source-over';
+      for (let i = smoke.length - 1; i >= 0; i--) { const s = smoke[i]; s.x += s.vx * k60; s.y += s.vy * k60; s.vx *= Math.pow(0.985, k60); s.r += 0.55 * k60; s.life -= 0.006 * k60; if (s.life <= 0) { smoke.splice(i, 1); continue; }
+        ctx.globalAlpha = smooth(s.life) * 0.5; ctx.drawImage(SMOKE, s.x - s.r * 1.4, s.y - s.r * 1.4, s.r * 2.8, s.r * 2.8); }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'lighter';
+      for (let i = parts.length - 1; i >= 0; i--) { const p = parts[i]; p.x += p.vx * k60; p.y += p.vy * k60; p.life -= 0.04 * k60; if (p.life <= 0) { parts.splice(i, 1); continue; }
+        const rr = (6 + (1 - p.life) * 22) * p.s; ctx.globalAlpha = smooth(p.life) * 0.5; ctx.drawImage(FIRE, p.x - rr, p.y - rr, rr * 2, rr * 2); }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      if (power > 0) plume(RX, rocketY, H, power, now);
       Scenes.starship(ctx, RX, rocketY, H, 'stack');
-      if (t < ign && !reduce) { ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.font = '600 14px system-ui'; ctx.textAlign = 'center'; ctx.fillText('T-' + Math.ceil((ign - t) / 1000) + ' · illustration', RX, padY + 28); }
-      if (!reduce) requestAnimationFrame(frame);
+      if (t < ign && !reduce) { const fr = (ign - t) % 1000 / 1000; ctx.globalAlpha = 0.45 + 0.4 * smooth(fr * 3); ctx.fillStyle = '#fff'; ctx.font = '600 14px system-ui'; ctx.textAlign = 'center'; ctx.fillText('T-' + Math.ceil((ign - t) / 1000) + ' · illustration', RX, padY + 28); ctx.globalAlpha = 1; }
+      ctx.restore();
+      if (!reduce) { const fade = Math.max(1 - smooth(t / FADE), smooth((t - (CYCLE - FADE)) / FADE)); if (fade > 0.001) { ctx.fillStyle = 'rgba(1,3,10,' + fade.toFixed(3) + ')'; ctx.fillRect(0, 0, w, h); } }
+      if (t < 60 && !reduce) { parts.length = 0; smoke.length = 0; }
+      if (running) raf = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    function sync() { const go = !reduce && visible && !document.hidden; if (go && !running) { running = true; last = 0; raf = requestAnimationFrame(frame); } else if (!go && running) { running = false; if (raf) cancelAnimationFrame(raf); raf = 0; } }
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; sync(); }).observe(c);
+    document.addEventListener('visibilitychange', sync);
+    (mq.addEventListener ? mq.addEventListener('change', e => { reduce = e.matches; sync(); if (reduce) frame(performance.now()); }) : 0);
+    if (reduce) frame(performance.now()); else sync();
   })();
 
   /* ---------- modal cards ---------- */
@@ -159,7 +198,6 @@
 
   /* ---------- game ---------- */
   const ORDER = EV.slice(); // already act-ordered
-  let picks = {}, side = null, cur = null, busy = false, showEnd = false;
   const ANIM_MS = () => window.SPCX_ANIM_MS || 2200;
   const ACTS = {
     1: { name: 'Act I · Compute', line: 'SpaceX rents GPU capacity it powers and runs. It earns the spread between the rental price and chips plus power, wide while compute is scarce.', fact: 'Company-wide installed GPU power was 1.7 GW nameplate at Sep 30, 2026 (1.4 GW Jun 30; 0.6 GW Sep 30, 2025) (Q3 8-K). Anthropic pays $1.25B a month through May 2029; after an initial three-month period, either side can end it on 90 days\u2019 notice (prospectus p. 14).', src: ['q10', 's424'] },
@@ -286,7 +324,7 @@
         const a = prices[seg], b = prices[seg + 1], q = Math.min(1, p * 1.6); pr = { price: a.price + (b.price - a.price) * q, cap: a.cap + (b.cap - a.cap) * q }; }
       else { seg = seq.length; Anim.ENDS[k](ctx, w, h, t - INTRO - seq.length * SEG); pr = prices[prices.length - 1]; }
       if (seg === seq.length && $('#fEndNum')) { $('#fEndNum').textContent = (elonUsed && elonActive() ? 'Elon\u2019s plan, scenario if his targets are hit. ' : '') + 'Final scenario price ' + fmtP(fr.price) + ' · market cap ' + fmtC(fr.cap) + ' · of which orbital add-on +' + fmtP(fr.orbPS) + ' (scenario).'; }
-      $('#fPrice').textContent = fmtP(pr.price); $('#fCap').textContent = fmtC(pr.cap); $('#fBar').style.width = (t / total * 100).toFixed(1) + '%';
+      $('#fPrice').textContent = fmtP(pr.price); $('#fCap').textContent = fmtC(pr.cap); $('#fBar').style.transform = 'scaleX(' + (t / total).toFixed(4) + ')';
       if (seg !== last) { last = seg;
         if (seg === -1) { $('#fStep').textContent = 'Start · Oct 29, 2026 close'; $('#fCapn').innerHTML = '<b>Liftoff.</b> SPCX at $' + A.spot.toFixed(2) + ' (' + fmtC(A.spot * A.shares) + '). Flight 14 reached orbit on Sep 28. Your 14 picks play out in date order.'; }
         else if (seg < seq.length) { const e = seq[seg], pk = picks[e.id]; $('#fStep').innerHTML = (seg + 1) + ' / ' + seq.length + ' · ' + (/^date not set/i.test(e.date) ? 'date not set, placed ~' : '') + fmtMon(e.sort) + ' · <span class="tg ' + pk + ' on">' + pk.toUpperCase() + '</span>'; $('#fCapn').innerHTML = '<span class="fdate">' + e.date.split('(')[0].replace(/\.\s*$/, '') + '</span><b>' + e.title + '</b><br>' + e.o[pk]; }

@@ -11,7 +11,7 @@
     const r = rng(seed); n = n || Math.floor(w * h / 1800);
     for (let i = 0; i < n; i++) {
       const x = r() * w, y = r() * h, s = r() * 1.4 + 0.2, ph = r() * 6.28;
-      const a = 0.35 + 0.65 * Math.abs(Math.sin((t || 0) * 0.0015 + ph));
+      const a = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin((t || 0) * 0.0011 + ph)); // smooth twinkle (abs(sin) blinked with a hard cusp)
       ctx.fillStyle = 'rgba(255,255,255,' + (a * (0.4 + s / 2)).toFixed(3) + ')';
       ctx.fillRect(x, y, s, s);
     }

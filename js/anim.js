@@ -6,7 +6,11 @@
   const C = { bull: '#36d399', neutral: '#f6c453', miss: '#ff6b6b' };
   function label(ctx, w, h, txt, o) { ctx.save(); const big = window.Anim && Anim.labelCenter; ctx.font = '700 ' + (big ? 20 : 15) + 'px system-ui'; const tw = ctx.measureText(txt).width + 22, bh = big ? 38 : 30, x = big ? (w - tw) / 2 : w - tw - 14, y = big ? 22 : 14; ctx.fillStyle = 'rgba(5,8,14,.78)'; ctx.fillRect(x, y, tw, bh); ctx.fillStyle = C[o]; ctx.fillRect(x, y, 4, bh); ctx.fillStyle = '#fff'; ctx.fillText(txt, x + 12, y + bh - (big ? 12 : 9)); ctx.restore(); }
   function fireball(ctx, x, y, k, s) { s = s || 1; for (let i = 0; i < 7; i++) { const a = i * 0.9, r = (20 + i * 9) * s * (0.4 + k); X.glow(ctx, x + Math.cos(a) * 16 * s * k, y + Math.sin(a) * 12 * s * k, r, 'rgba(255,' + (140 + i * 10) + ',60,' + (0.7 * (1 - k * 0.6)).toFixed(2) + ')'); } X.glow(ctx, x, y, 30 * s * (1 - k * 0.5), 'rgba(255,250,220,' + (1 - k).toFixed(2) + ')'); }
-  function flame(ctx, x, y, len, wid) { X.glow(ctx, x, y + len * 0.3, len * 0.6, 'rgba(255,170,70,.55)'); ctx.fillStyle = 'rgba(255,240,200,.9)'; ctx.beginPath(); ctx.moveTo(x - wid, y); ctx.lineTo(x + wid, y); ctx.lineTo(x, y + len); ctx.fill(); }
+  function flame(ctx, x, y, len, wid) { // soft layered plume (was a flat white triangle)
+    const f = 1 + 0.07 * Math.sin(performance.now() * 0.03) + 0.04 * Math.sin(performance.now() * 0.071); len *= f;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; X.glow(ctx, x, y + len * 0.35, len * 0.8, 'rgba(255,150,60,.45)');
+    const g = ctx.createLinearGradient(0, y, 0, y + len); g.addColorStop(0, 'rgba(255,250,232,.95)'); g.addColorStop(0.3, 'rgba(255,196,110,.8)'); g.addColorStop(1, 'rgba(255,90,30,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - wid, y); ctx.bezierCurveTo(x - wid * 1.4, y + len * 0.35, x - wid * 0.3, y + len * 0.85, x, y + len); ctx.bezierCurveTo(x + wid * 0.3, y + len * 0.85, x + wid * 1.4, y + len * 0.35, x + wid, y); ctx.fill(); ctx.restore(); }
   function dollars(ctx, w, h, t, up, col) { const r = X.rng(9); ctx.font = '700 16px system-ui'; for (let i = 0; i < 26; i++) { const x = r() * w, sp = 0.04 + r() * 0.05; let y = ((r() * h + (up ? -1 : 1) * t * sp) % h + h) % h; ctx.fillStyle = col; ctx.globalAlpha = 0.25 + r() * 0.5; ctx.fillText('$', x, y); } ctx.globalAlpha = 1; }
 
   /* draw(ctx, w, h, t, p): p = 0..1 progress of the outcome animation */
