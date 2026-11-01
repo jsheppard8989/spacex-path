@@ -71,7 +71,12 @@
     function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; }
     size(); addEventListener('resize', size);
     const CYCLE = 15000; let t0 = performance.now();
-    function frame(now) {
+    /* PROTOTYPE: pause offscreen/hidden tab; sync launch glow to page (--ignite) */
+    let onscreen = true, raf = 0, lastIg = -1; const heroEl = c.closest('.hero') || document.documentElement;
+    function kick() { if (!raf && onscreen && !document.hidden && !reduce) raf = requestAnimationFrame(frame); }
+    new IntersectionObserver(es => { onscreen = es[0].isIntersecting; kick(); }).observe(c);
+    document.addEventListener('visibilitychange', kick);
+    function frame(now) { raf = 0;
       const t = reduce ? 1500 : (now - t0) % CYCLE; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const ign = 2200, tt = Math.max(0, t - ign) / 1000; const rise = tt > 0.6 ? 0.5 * 38 * Math.pow(tt - 0.6, 2.1) : 0;
       const RX = w > 900 ? w * 0.74 : w * 0.5; const padY = h * 0.84, H = Math.min(h * 0.62, w * 1.1); let rocketY = padY - rise, cam = 0;
@@ -89,7 +94,7 @@
       }
       // exhaust
       if (t > ign && !reduce) {
-        const n = 14; for (let i = 0; i < n; i++) parts.push({ x: RX + (Math.random() - .5) * H * 0.05, y: rocketY, vx: (Math.random() - .5) * 1.2, vy: 6 + Math.random() * 6, life: 1 });
+        const n = parts.length > 600 ? 0 : 14; for (let i = 0; i < n; i++) parts.push({ x: RX + (Math.random() - .5) * H * 0.05, y: rocketY, vx: (Math.random() - .5) * 1.2, vy: 6 + Math.random() * 6, life: 1 });
         if (gy < h + 50) for (let i = 0; i < 3; i++) smoke.push({ x: RX + (Math.random() - .5) * 30, y: gy - 4, vx: (Math.random() - .5) * 7, vy: -Math.random() * 1.5, r: 10 + Math.random() * 20, life: 1 });
       }
       for (let i = smoke.length - 1; i >= 0; i--) { const s = smoke[i]; s.x += s.vx; s.y += s.vy + (cam ? 0 : 0); s.r += 0.6; s.life -= 0.008; if (s.life <= 0) { smoke.splice(i, 1); continue; }
@@ -101,9 +106,11 @@
       ctx.globalCompositeOperation = 'source-over';
       Scenes.starship(ctx, RX, rocketY, H, 'stack');
       if (t < ign && !reduce) { ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.font = '600 14px system-ui'; ctx.textAlign = 'center'; ctx.fillText('T-' + Math.ceil((ign - t) / 1000) + ' · illustration', RX, padY + 28); }
-      if (!reduce) requestAnimationFrame(frame);
+      const ig = reduce || t < ign ? 0 : Math.min(1, (t - ign) / 600) * Math.max(0, 1 - cam / (h * 0.8)) * (0.85 + 0.15 * Math.sin(now * 0.03));
+      if (Math.abs(ig - lastIg) > 0.02) { heroEl.style.setProperty('--ignite', ig.toFixed(2)); lastIg = ig; }
+      if (!reduce && onscreen && !document.hidden) raf = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame);
   })();
 
   /* ---------- modal cards ---------- */

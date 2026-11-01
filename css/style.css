@@ -201,3 +201,10 @@ details.fdials summary{font-size:11px;color:var(--acc);cursor:pointer;margin-top
   .hero .jared-take-wrap{bottom:calc(var(--banner-h,34px) + 10px)}
 }
 @media (max-width:760px){.hero .startnum{padding:8px 12px;gap:10px}.hero .cta{margin-top:12px}}
+
+/* PROTOTYPE: launch glow spills onto the stat card + take box (driven by --ignite from the hero canvas) */
+@media (prefers-reduced-motion: no-preference){
+  .hero .startnum,.hero .jared-take-wrap .jared-take,.hero .jared-take-wrap>*:first-child{
+    box-shadow:0 0 calc(60px * var(--ignite,0)) rgba(255,140,60,calc(.35 * var(--ignite,0))), inset 0 -1px 0 rgba(255,170,90,calc(.5 * var(--ignite,0)));
+    border-color:rgba(255,160,80,calc(.15 + .35 * var(--ignite,0)))}
+}
