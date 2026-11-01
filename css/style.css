@@ -162,3 +162,11 @@ details.fdials summary{font-size:11px;color:var(--acc);cursor:pointer;margin-top
 .mathvals>div{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#070b12}
 .mathvals .lbl{display:block;font-size:11px;color:var(--mut);margin-bottom:4px}
 @media (max-width:760px){.mathvals{grid-template-columns:1fr 1fr}}
+
+/* Jared's take: styled like the dashboard's Curve Snapshot card */
+.jared-take-wrap{padding-top:18px;padding-bottom:0}
+.jared-take{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.75rem;backdrop-filter:blur(10px)}
+.jared-take h3{font-size:.9rem;color:#00d4ff;margin:0 0 .25rem}
+.jared-take .jt-title{color:#e8edf3;font-weight:700;font-size:.85rem;margin-bottom:.3rem}
+.jared-take .jt-body p{color:#a8b2d1;font-size:.8rem;line-height:1.45;margin:0 0 .45rem}
+.jared-take .jt-body p.joke-disclaimer{color:#9ca3af;font-size:.68rem;margin:0}
