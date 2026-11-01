@@ -13,6 +13,9 @@
   function applyPrices() {
     A.spot = PR.spcx.price; A.shares = PR.spcx.shares;
     $('#heroPrice').textContent = fmtP(A.spot); $('#heroCap').textContent = fmtC(A.spot * A.shares);
+    // headline + intro read the same prices.json values as the card, so they can't drift
+    document.querySelectorAll('.live-cap').forEach(e => { e.textContent = fmtC(A.spot * A.shares); });
+    document.querySelectorAll('.live-price').forEach(e => { e.textContent = fmtP(A.spot); });
   }
   if (location.protocol === 'file:') { applyPrices(); } // browsers block fetch() on file://; embedded values mirror data/prices.json
   else fetch('data/prices.json').then(r => r.ok ? r.json() : null).then(j => { if (j) PR = j; }).catch(() => {}).finally(() => { applyPrices(); renderGame(); });
