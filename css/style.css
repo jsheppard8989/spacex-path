@@ -179,3 +179,25 @@ details.fdials summary{font-size:11px;color:var(--acc);cursor:pointer;margin-top
   .hero .hero-copy{position:relative;top:0;padding-top:7vh}
   .hero .jared-take-wrap{position:relative;left:auto;bottom:auto;width:auto;max-height:none;overflow:visible;margin:16px max(18px,5vw) 18px}
 }
+/* take v2 sizing (G): larger type, box as wide as the hero column */
+.hero .jared-take-wrap{width:calc(min(760px,62vw) - 5vw)}
+.hero .jared-take{padding:.9rem 1rem}
+.hero .jared-take h3{font-size:.95rem}
+.hero .jared-take .jt-title{font-size:1.2rem;margin-bottom:.4rem}
+.hero .jared-take .jt-body p{font-size:1.08rem;line-height:1.55;margin:0 0 .5rem}
+.hero .jared-take .jt-body p.joke-disclaimer{font-size:.85rem;line-height:1.4}
+@media (max-width:1100px),(max-height:720px){
+  .hero .jared-take-wrap{width:auto}
+  .hero .jared-take .jt-body p{font-size:1rem;line-height:1.5}
+  .hero .jared-take .jt-title{font-size:1.1rem}
+}
+/* desktop overlay mode: compact the hero copy so the larger take box fits above the fold */
+@media (min-width:1101px) and (min-height:721px){
+  .hero .hero-copy{top:4vh;display:flex;flex-wrap:wrap;align-items:flex-end;column-gap:16px}
+  .hero .hero-copy>p,.hero .hero-copy>h1{flex:0 0 100%}
+  .hero h1{font-size:clamp(26px,3vw,42px);margin-bottom:12px}
+  .hero .startnum{padding:8px 14px}
+  .hero .cta{margin-top:0}
+  .hero .jared-take-wrap{bottom:calc(var(--banner-h,34px) + 10px)}
+}
+@media (max-width:760px){.hero .startnum{padding:8px 12px;gap:10px}.hero .cta{margin-top:12px}}
