@@ -249,3 +249,7 @@ details.fdials summary{font-size:11px;color:var(--acc);cursor:pointer;margin-top
   .rv{opacity:1;transform:none}
 }
 
+/* phone overflow fix: table scrolls inside its wrapper; tooltips never exceed the viewport */
+.tblwrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tip{max-width:calc(100vw - 24px)}
+@media (max-width:600px){.tip{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}}
