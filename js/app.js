@@ -8,6 +8,7 @@
   const L = { near: { bull: Math.log(A.b3m / A.spot), neutral: Math.log(A.n3m / A.spot) }, long: { bull: Math.log(A.b3y / A.b3m), neutral: Math.log(A.n3y / A.n3m) } };
   const srcLinks = keys => (keys || []).map(k => SRC[k] ? '<a href="' + SRC[k].u + '" target="_blank" rel="noopener">' + SRC[k].t + '</a>' : '').join(' · ');
   let PR = { spcx: { price: 143.89, shares: 13.579e9 }, tsla: { marketCap: 1.493e12 }, asOf: '2026-10-29 close (America/Chicago)' };
+  let picks = {}, side = null, cur = null, busy = false, showEnd = false;
 
   /* ---------- prices (local data file; embedded fallback for file://) ---------- */
   function applyPrices() {
@@ -85,9 +86,9 @@
       });
       twinkle = Array.from({ length: 26 }, () => ({ x: r(), y: r(), s: 1 + r() * 1.6, ph: r() * 6.283, sp: 0.0006 + r() * 0.0009 }));
     }
+    const CYCLE = 15000, ign = 2200, FADE = 900; let clock = 0, last = 0, running = false, visible = true, raf = 0;
     function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; buildStars(); if (reduce) frame(performance.now()); }
     let rt; size(); addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(size, 120); });
-    const CYCLE = 15000, ign = 2200, FADE = 900; let clock = 0, last = 0, running = false, visible = true, raf = 0;
     function plume(x, y, H, power, now) { // layered engine plume: wide warm bloom, long soft flame, white-hot core
       const f = 1 + 0.08 * noise(now), L = H * (0.16 + 0.22 * power) * f, W = H * 0.05;
       ctx.globalCompositeOperation = 'lighter';
@@ -197,7 +198,6 @@
 
   /* ---------- game ---------- */
   const ORDER = EV.slice(); // already act-ordered
-  let picks = {}, side = null, cur = null, busy = false, showEnd = false;
   const ANIM_MS = () => window.SPCX_ANIM_MS || 2200;
   const ACTS = {
     1: { name: 'Act I · Compute', line: 'SpaceX rents GPU capacity it powers and runs. It earns the spread between the rental price and chips plus power, wide while compute is scarce.', fact: 'Company-wide installed GPU power was 1.7 GW nameplate at Sep 30, 2026 (1.4 GW Jun 30; 0.6 GW Sep 30, 2025) (Q3 8-K). Anthropic pays $1.25B a month through May 2029; after an initial three-month period, either side can end it on 90 days\u2019 notice (prospectus p. 14).', src: ['q10', 's424'] },
