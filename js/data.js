@@ -39,7 +39,8 @@ window.SRC = {
   optimus: { t: 'Decrypt, Apr 2025: Musk post "Starship will hopefully depart for Mars ... with Optimus" (press)', u: 'https://decrypt.co/314334/elon-musk-robots-mars-2026' },
   moonpivot: { t: 'RealClearMarkets quoting Musk X post, Feb 2026: Moon first, Mars city in 5-7 years (press)', u: 'https://www.realclearmarkets.com/articles/2026/02/27/moon_or_mars_has_elon_musk_abandoned_his_goal_1167013.html' },
   xxq: { t: 'xxquant summary of MS (cost of equity 11.9%) (secondary)', u: 'https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39' },
-  faa: { t: 'FAA: Starship at Starbase (up to 25 launches/yr)', u: 'https://www.faa.gov/space/stakeholder_engagement/spacex_starship' }
+  faa: { t: 'FAA: Starship at Starbase (up to 25 launches/yr)', u: 'https://www.faa.gov/space/stakeholder_engagement/spacex_starship' },
+  teslarati: { t: 'Teslarati, Nov 5, 2026: SpaceX targeting Fri Nov 13 for Flight 15 / first ship catch; Dontchev at UP.Summit via Eric Berger (press)', u: 'https://www.teslarati.com/spacex-starship-catch-nov-13/' }
 };
 
 /* Scenario anchors (OPINION) */
@@ -56,7 +57,7 @@ window.BUCKETS = {
 
 /* acts: compute, launch, starship. group: near = dated 2026 window, long = 2027+ / undated */
 window.EVENTS = [
- { id: 'C1', act: 1, theme: 'datacenter', title: "Google's grace period ends", date: 'Grace period ends about Sat Oct 31, 2026; checked at the Q3 10-Q (due by Mon Nov 16, 2026)', dateNote: 'filing', sort: '2026-10-31', src: ['gfwp', 'form10q'],
+ { id: 'C1', act: 1, theme: 'datacenter', title: "Google's grace period ended", date: 'Grace period ended about Sat Oct 31, 2026; Q3 10-Q check due Mon Nov 16, 2026', dateNote: 'filing', sort: '2026-10-31', src: ['gfwp', 'form10q'],
    group: 'near', w: 0.18, bucket: 'ai', missHit: -0.184,
    fact: 'Google pays <b>$920M a month</b> from October for about 110,000 GPUs. If SpaceX did not deliver the committed GPUs by Sep 30, 2026, Google can, after a one-month grace period, end the deal or take the GPUs delivered at a pro rata lower fee (SEC filing). As of Oct 23, SpaceX has not said whether it met the Sep 30 deadline: its Q3 results release (8-K, Oct 20), EDGAR (no later 8-K) and CNBC\'s coverage of the Q3 call do not address it.',
    factSrc: ['gfwp', 'q3', 'edgar8k', 'cnbcq3'],
@@ -112,12 +113,12 @@ window.EVENTS = [
    o: { miss: 'Revenue per subscriber resumes falling (Q3 ARPU $69, up from $66) and Starlink is valued like a utility.', neutral: 'Subscribers grow about 25% a year; pricing stabilizes.', bull: 'V3 capacity (1 Tbps per satellite) lifts enterprise, aviation and maritime sales.' },
    confirm: 'FY2027 10-K, about Feb 2028' },
 
- { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Targeted for next month (Musk, Oct 20 call); no specific date given. Nov 8 earliest is from press reports of an FAA planning slide', sort: '2026-11-08', src: ['spacecom', 'cnbcq3', 'aishift', 'nsf'],
+ { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Verbal SpaceX executive target Fri Nov 13, 2026 (Dontchev at UP.Summit Thu Nov 5, via Eric Berger); no official SpaceX mission page. Musk Oct 20 call: next month / double catch', sort: '2026-11-13', src: ['teslarati', 'spacecom', 'cnbcq3', 'aishift', 'nsf'],
    group: 'near', w: 0.20, bucket: 'starship',
-   fact: 'Flight 14 reached orbit on <b>Sep 28, 2026</b> and deployed <b>26 Starlink V3 satellites</b>. Flight 15 is targeted for next month (Musk, Oct 20 call); SpaceX will attempt to catch both booster and ship. No specific date given (Space.com, CNBC, press).',
-   factSrc: ['f14', 'nsf'],
+   fact: 'Flight 14 reached orbit on <b>Sep 28, 2026</b> and deployed <b>26 Starlink V3 satellites</b>. Flight 15 has a verbal SpaceX executive target of <b>Friday Nov 13, 2026</b> (SpaceX VP Launch Kiko Dontchev at UP.Summit Thu Nov 5, reported by Eric Berger); there is still no official SpaceX mission page. Musk said on the Oct 20 call that Flight 15 was targeted for next month and would attempt to catch both booster and ship.',
+   factSrc: ['f14', 'teslarati', 'cnbcq3'],
    o: { miss: 'Anomaly, or no Flight 15 by Dec 31. Every later gate slips.', neutral: 'Flies cleanly with ocean recoveries; no catch.', bull: 'Clean flight and recovered hardware: reuse is on the clock.' },
-   confirm: 'Flight 15 itself (date not set)' },
+   confirm: 'Flight 15 itself (verbal target Fri Nov 13, 2026; no official mission page)' },
  { id: 'G2', act: 3, gate: 2, theme: 'orbit', title: 'Gate 2: Starlink V3 deployment becomes routine (Flight 16)', date: 'Date not set (press report of an FAA planning slide: no earlier than Dec 10, 2026, possibly from LC-39A)', sort: '2026-12-10', src: ['aishift', 'nsf'],
    group: 'near', w: 0.16, bucket: 'starship',
    fact: 'SpaceX expects up to <b>60 V3 satellites</b> per Starship launch, each designed for <b>1 Tbps</b> of downlink (prospectus). SpaceX says that is about <b>20x</b> a Falcon 9 load (press quoting SpaceX).',
