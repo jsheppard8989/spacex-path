@@ -40,11 +40,17 @@ window.SRC = {
   moonpivot: { t: 'RealClearMarkets quoting Musk X post, Feb 2026: Moon first, Mars city in 5-7 years (press)', u: 'https://www.realclearmarkets.com/articles/2026/02/27/moon_or_mars_has_elon_musk_abandoned_his_goal_1167013.html' },
   xxq: { t: 'xxquant summary of MS (cost of equity 11.9%) (secondary)', u: 'https://www.xxquant.com/en/institution/institutional-research/529e31182ae25f60d329abc6c2209e39' },
   faa: { t: 'FAA: Starship at Starbase (up to 25 launches/yr)', u: 'https://www.faa.gov/space/stakeholder_engagement/spacex_starship' },
-  teslarati: { t: 'Teslarati, Nov 5, 2026: SpaceX targeting Fri Nov 13 for Flight 15 / first ship catch; Dontchev at UP.Summit via Eric Berger (press)', u: 'https://www.teslarati.com/spacex-starship-catch-nov-13/' }
+  teslarati: { t: 'Teslarati, Nov 5, 2026: SpaceX targeting Fri Nov 13 for Flight 15 / first ship catch; Dontchev at UP.Summit via Eric Berger (press)', u: 'https://www.teslarati.com/spacex-starship-catch-nov-13/' },
+  f15: { t: 'SpaceX: Starship Flight 15 page', u: 'https://www.spacex.com/launches/starship-flight-15' },
+  spacecom15: { t: 'Space.com, Nov 15, 2026: Flight 15 ship catch; booster diverted after a low-fuel alarm (press)', u: 'https://www.space.com/space-exploration/launches-spacecraft/whats-next-for-spacexs-starship-after-epic-flight-15-chopsticks-catch' },
+  spacecom15launch: { t: 'Space.com, Nov 13, 2026: Flight 15 liftoff 4:47 p.m. CT; booster catch aborted (press)', u: 'https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship' },
+  sfn15: { t: 'Spaceflight Now: Flight 15 liftoff 4:47 p.m. CST Nov 13; ship catch 3:20 p.m. CST Nov 14; booster diverted (press)', u: 'https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/' },
+  sxlaunches: { t: 'SpaceX launches list (checked Nov 19, 2026): Flight 15 complete; no Flight 16 mission page', u: 'https://www.spacex.com/launches/' },
+  q310q: { t: 'SpaceX Q3 2026 10-Q, filed Oct 22, 2026 (SEC EDGAR index)', u: 'https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/0001628280-26-066880-index.htm' }
 };
 
 /* Scenario anchors (OPINION) */
-window.ANCHORS = { spot: 134.72, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
+window.ANCHORS = { spot: 139.11, shares: 13.579e9, b3m: 210, n3m: 165, m3m: 118, b3y: 275.03, n3y: 138.15, m3y: 52, b3yDesk: 310, n3yDesk: 145, orbStrip: { bull: 500e9, neutral: 100e9, bear: 0 },
   sh3y: { bull: 14.3e9, neutral: 14.6e9, miss: 15.2e9 }, shRaise: 13.98e9 };
 
 /* Downside bucket hits (downside estimates) */
@@ -57,18 +63,18 @@ window.BUCKETS = {
 
 /* acts: compute, launch, starship. group: near = dated 2026 window, long = 2027+ / undated */
 window.EVENTS = [
- { id: 'C1', act: 1, theme: 'datacenter', title: "Google's grace period ended", date: 'Grace period ended about Sat Oct 31, 2026; Q3 10-Q check due Mon Nov 16, 2026', dateNote: 'filing', sort: '2026-10-31', src: ['gfwp', 'form10q'],
+ { id: 'C1', act: 1, theme: 'datacenter', title: "Google's grace period ended", date: 'Grace period ended about Sat Oct 31, 2026; Q3 10-Q filed Thu Oct 22, 2026 (statutory due date was Mon Nov 16)', dateNote: 'filing', sort: '2026-10-31', src: ['gfwp', 'form10q', 'q310q'],
    group: 'near', w: 0.18, bucket: 'ai', missHit: -0.184,
-   fact: 'Google pays <b>$920M a month</b> from October for about 110,000 GPUs. If SpaceX did not deliver the committed GPUs by Sep 30, 2026, Google can, after a one-month grace period, end the deal or take the GPUs delivered at a pro rata lower fee (SEC filing). As of Oct 23, SpaceX has not said whether it met the Sep 30 deadline: its Q3 results release (8-K, Oct 20), EDGAR (no later 8-K) and CNBC\'s coverage of the Q3 call do not address it.',
+   fact: 'Google pays <b>$920M a month</b> from October for about 110,000 GPUs. If SpaceX did not deliver the committed GPUs by Sep 30, 2026, Google can, after a one-month grace period, end the deal or take the GPUs delivered at a pro rata lower fee (SEC filing). The Q3 10-Q was filed Thu Oct 22, 2026 (SEC). This page has not yet recorded whether that filing confirms the Sep 30 delivery.',
    factSrc: ['gfwp', 'q3', 'edgar8k', 'cnbcq3'],
-   o: { miss: 'By the Q3 10-Q (due by Nov 16), SpaceX discloses that Google ended the deal or took partial capacity at a reduced fee.', neutral: 'The Q3 10-Q is silent on delivery; payments continue.', bull: 'By the Q3 10-Q (due by Nov 16), SpaceX confirms full delivery and the full $920M a month.' },
-   confirm: 'Q3 report / 10-Q (due by Nov 16, 2026)' },
- { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Released Tue Oct 20, 2026 (8-K, after the close): results out, final result pending. 10-Q due by Mon Nov 16, 2026', sort: '2026-10-20', src: ['q3', 'form10q'],
+   o: { miss: 'The Q3 10-Q (filed Oct 22) discloses that Google ended the deal or took partial capacity at a reduced fee.', neutral: 'The Q3 10-Q is silent on delivery; payments continue.', bull: 'The Q3 10-Q (filed Oct 22) confirms full delivery and the full $920M a month.' },
+   confirm: 'Q3 10-Q, filed Thu Oct 22, 2026 (SEC); delivery confirmation not yet re-checked on this page' },
+ { id: 'C2', act: 1, theme: 'chart', title: 'Q3 2026 results: the AI revenue print', date: 'Released Tue Oct 20, 2026 (8-K, after the close). Q3 10-Q filed Thu Oct 22, 2026 (statutory due date was Mon Nov 16)', sort: '2026-10-20', src: ['q3', 'form10q', 'q310q'],
    group: 'near', w: 0.26, bucket: 'ai', missHit: -0.203,
-   fact: 'Released Tue Oct 20, 2026 (8-K, after the close). Revenue <b>$14.58B</b> ($14,575M); Super Intelligence (SI, formerly the AI segment) revenue <b>$7.56B</b>; net income <b>$4.40B</b> ($4,404M); operating income $2.8B. <b>Result so far:</b> SI revenue of $7.56B is above the $7B Bull bar, but capacity delivery is not yet confirmed, so results are out and the final result is pending until the 10-Q (due by Mon Nov 16, 2026).',
+   fact: 'Released Tue Oct 20, 2026 (8-K, after the close). Revenue <b>$14.58B</b> ($14,575M); Super Intelligence (SI, formerly the AI segment) revenue <b>$7.56B</b>; net income <b>$4.40B</b> ($4,404M); operating income $2.8B. <b>Result so far:</b> SI revenue of $7.56B is above the $7B Bull bar. The Q3 10-Q was filed Thu Oct 22, 2026 (SEC). Capacity delivery has not yet been re-checked against that filing on this page.',
    factSrc: ['q3'],
    o: { miss: 'AI revenue comes in under $5B with capex still about $18B a quarter.', neutral: 'AI revenue roughly in line; capex unchanged; Starlink ARPU (average revenue per user) flat.', bull: 'AI revenue at or above $7B and capacity delivery confirmed.' },
-   confirm: 'Q3 10-Q, due by Mon Nov 16, 2026' },
+   confirm: 'Q3 10-Q, filed Thu Oct 22, 2026 (SEC); capacity delivery not yet re-checked on this page' },
  { id: 'C3', act: 1, theme: 'datacenter', title: 'A 90-day termination notice (or none)', date: "Date not set. Google's 90-day right starts after Dec 31, 2026 (press); Anthropic: after an initial three-month period, either side can end it on 90 days’ notice (prospectus p. 14)", sort: '2026-12-31', src: ['web', 's424'],
    group: 'long', w: 0.12, bucket: 'ai', missHit: -0.25,
    fact: 'Anthropic: <b>$1.25B a month through May 2029</b> (about $15B a year), <i>contracted, not guaranteed</i>. <b>After an initial three-month period, either side can end it on 90 days’ notice</b> (prospectus p. 14).',
@@ -88,7 +94,7 @@ window.EVENTS = [
    o: { miss: 'Rental prices reset toward $8 to $10 a watt as hyperscalers bring their own capacity online.', neutral: 'Prices drift down to consensus as contracts roll.', bull: 'Compute stays scarce; renewals price at or above today.' },
    confirm: 'Renewal terms disclosed around May 2029' },
 
- { id: 'L1', act: 2, theme: 'vault', title: '135-day lock-up tranche', date: 'On or after Sat Oct 24, 2026', sort: '2026-10-24', src: ['s424'],
+ { id: 'L1', act: 2, theme: 'vault', title: '135-day lock-up tranche', date: 'On or after Sat Oct 24, 2026 (tranche date passed; five-day window ended Fri Oct 30, 2026)', sort: '2026-10-24', src: ['s424'],
    group: 'near', w: 0.06, bucket: 'capital', missHit: -0.17,
    fact: 'Up to <b>328.4M shares</b> become eligible for sale (prospectus lock-up table, p. 259). Schedule: Oct 22: up to 1.3B; Oct 24: up to 328.4M; Dec 8: up to 797.6M (the early release of extra shares did not happen: it needed closes of $175.50 or more, 30% above the $135 IPO price, on 5 of the 10 trading days up to the early-August Q2 results, and the stock closed at about $108–$125 then). Total Oct 22–Dec 8: about 2.43B (prospectus pp. 259–260; total is our arithmetic).',
    factSrc: ['s424'],
@@ -113,18 +119,18 @@ window.EVENTS = [
    o: { miss: 'Revenue per subscriber resumes falling (Q3 ARPU $69, up from $66) and Starlink is valued like a utility.', neutral: 'Subscribers grow about 25% a year; pricing stabilizes.', bull: 'V3 capacity (1 Tbps per satellite) lifts enterprise, aviation and maritime sales.' },
    confirm: 'FY2027 10-K, about Feb 2028' },
 
- { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Verbal SpaceX executive target Fri Nov 13, 2026 (Dontchev via Berger); FAA CADENA also NET Nov 13 (press). No official SpaceX confirmation; no Flight 15 license listed. Double-catch still Musk/Shotwell Oct framing', sort: '2026-11-13', src: ['teslarati', 'faa', 'spacecom', 'cnbcq3', 'aishift', 'nsf'],
+ { id: 'G1', act: 3, gate: 1, theme: 'launch', title: 'Gate 1: reuse demonstrated (Flight 15)', date: 'Launched Fri Nov 13, 2026, 4:47 p.m. CT; ship caught Sat Nov 14, 3:20 p.m. CT. Booster catch aborted; booster diverted offshore (SpaceX; Space.com)', sort: '2026-11-13', src: ['f15', 'spacecom15', 'spacecom15launch', 'sfn15'],
    group: 'near', w: 0.20, bucket: 'starship',
-   fact: 'Flight 14 reached orbit on <b>Sep 28, 2026</b> and deployed <b>26 Starlink V3 satellites</b>. Flight 15 has a verbal SpaceX executive target of <b>Friday Nov 13, 2026</b> (SpaceX VP Launch Kiko Dontchev at UP.Summit Thu Nov 5, reported by Eric Berger); an FAA CADENA planning slide also lists NET Nov 13 (press). There is still no official SpaceX mission page, and the FAA Starship page still lists no Flight 15 license. Double-catch (booster and ship) remains Musk/Shotwell October framing and is not FAA-confirmed. Musk said on the Oct 20 call that Flight 15 was targeted for next month and would attempt to catch both stages.',
-   factSrc: ['f14', 'teslarati', 'faa', 'cnbcq3'],
+   fact: 'Flight 15 lifted off from Starbase on <b>Friday, Nov 13, 2026</b> at 4:47 p.m. CT. SpaceX had planned to catch both the booster and the ship. The booster\'s boostback burn ended early because of low fuel mass (root cause still under investigation); its guidance system aborted the tower catch and sent the booster to an offshore landing in the Gulf, where the flight-termination system triggered after the landing burn. The ship reached orbit, deployed <b>26 Starlink V3 satellites</b>, and was caught by the tower at Starbase on <b>Saturday, Nov 14</b> at 3:20 p.m. CT, about 22.5 hours after liftoff, the first catch of a Starship upper stage. What this page previously said: a verbal executive target of Nov 13, no official mission page, and a double-catch that was not FAA-confirmed. The flight lifted off on that Nov 13 target; the official mission page is now up; the ship was caught and the booster was not.',
+   factSrc: ['f15', 'spacecom15', 'spacecom15launch', 'sfn15'],
    o: { miss: 'Anomaly, or no Flight 15 by Dec 31. Every later gate slips.', neutral: 'Flies cleanly with ocean recoveries; no catch.', bull: 'Clean flight and recovered hardware: reuse is on the clock.' },
-   confirm: 'Flight 15 itself (verbal/NET target Fri Nov 13, 2026; no official mission page; license still not listed)' },
- { id: 'G2', act: 3, gate: 2, theme: 'orbit', title: 'Gate 2: Starlink V3 deployment becomes routine (Flight 16)', date: 'Date not set (press report of an FAA planning slide: no earlier than Dec 10, 2026, possibly from LC-39A)', sort: '2026-12-10', src: ['aishift', 'nsf'],
+   confirm: 'Flight 15 (flown): ship catch confirmed; booster catch aborted (SpaceX, checked Nov 19, 2026)' },
+ { id: 'G2', act: 3, gate: 2, theme: 'orbit', title: 'Gate 2: Starlink V3 deployment becomes routine (Flight 16)', date: 'Date not set by SpaceX (no mission page; launches list checked Nov 19, 2026). October press reports of an FAA planning slide listed no earlier than Dec 10, 2026, possibly from LC-39A (NSF, Oct 9)', sort: '2026-12-10', src: ['nsf', 'sxlaunches', 'aishift'],
    group: 'near', w: 0.16, bucket: 'starship',
-   fact: 'SpaceX expects up to <b>60 V3 satellites</b> per Starship launch, each designed for <b>1 Tbps</b> of downlink (prospectus). SpaceX says that is about <b>20x</b> a Falcon 9 load (press quoting SpaceX).',
-   factSrc: ['s424', 'spacecom'],
+   fact: 'SpaceX expects up to <b>60 V3 satellites</b> per Starship launch, each designed for <b>1 Tbps</b> of downlink (prospectus). SpaceX says that is about <b>20x</b> a Falcon 9 load (press quoting SpaceX). SpaceX has not announced a Flight 16 date or posted a mission page (launches list checked Nov 19, 2026). October press reports of an FAA planning slide listed no earlier than Dec 10, 2026, possibly from LC-39A (NSF); that remains an unofficial planning figure, not a SpaceX confirmation.',
+   factSrc: ['s424', 'spacecom', 'sxlaunches', 'nsf'],
    o: { miss: 'Mishap investigation pushes Starlink flights into mid-2027.', neutral: 'Flies, but cadence stays slow into 2027.', bull: 'Second operational V3 deployment; a regular cadence starts.' },
-   confirm: 'Flight 16 itself (date not set)' },
+   confirm: 'Flight 16 itself (no official SpaceX date as of Nov 19, 2026; October press listed NET Dec 10)' },
  { id: 'G3', act: 3, gate: 3, theme: 'launch', title: 'Gate 3: outside customers fly on Starship', date: 'Date not set', sort: '2027-09-01', src: ['q10'],
    group: 'long', w: 0.10, bucket: 'starship',
    fact: 'To date all Starship launches are classified as internal (10-Q). Space segment revenue was <b>$1.77B</b> in Q3 (up 84% from $0.96B in Q2; Q3 8-K); the first Falcon 9 (2010) cut launch cost to about $2,700/kg, about 85% below the $18,500/kg historical average (prospectus citing NASA).',
@@ -149,6 +155,8 @@ window.EVENTS = [
 window.RADAR = [
  { title: 'Starship Flight 14 reached orbit, 26 V3 Starlinks', date: 'Mon Sep 28, 2026 (done)', sort: '2026-09-28', theme: 'orbit', src: ['f14'], done: true,
    fact: 'First orbital Starship flight and first operational V3 deployment. Real-world anchor for "gate 0" being passed.' },
+ { title: 'Starship Flight 15: ship caught at Starbase; booster catch aborted', date: 'Fri Nov 13–Sat Nov 14, 2026 (done)', sort: '2026-11-13', theme: 'launch', src: ['f15', 'spacecom15', 'sfn15'], done: true,
+   fact: 'Lifted off Fri Nov 13 at 4:47 p.m. CT. Ship reached orbit, deployed 26 Starlink V3 satellites, and was caught at Starbase Sat Nov 14 at 3:20 p.m. CT, about 22.5 hours after liftoff (first ship catch). Booster catch aborted after a low-fuel boostback; booster diverted offshore and the flight-termination system triggered (SpaceX; Space.com; Spaceflight Now).' },
  { title: '120-day lock-up tranche (up to 328.4M shares)', date: 'Fri Oct 9, 2026 (done)', sort: '2026-10-09', theme: 'vault', src: ['s424'], done: true, fact: 'Prospectus lock-up table, p. 259. Outcome: closed at $162.57 on Oct 9, up 1.25% from $160.57 on Oct 8 (Yahoo Finance).' },
  { title: 'Musk shares (6.4B) eligible; S&P 500 seasoning met (12 months listed, needed for index entry)', date: 'On or after Sat Jun 12, 2027', sort: '2027-06-12', theme: 'vault', src: ['s424'], fact: 'S&P 500 also needs GAAP profits. Supply event, not in the game math.' },
 ];
